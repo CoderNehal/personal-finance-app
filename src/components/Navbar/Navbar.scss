@@ -1,15 +1,19 @@
+.active {
+	color: red;
+}
+
 @media (max-width: 767px) {
 	.navicon {
 		width: 1.125em;
-		height: .125em;
+		height: 0.125em;
 		&::before {
 			display: block;
 			position: absolute;
 			width: 100%;
 			height: 100%;
-			transition: all .2s ease-out;
+			transition: all 0.2s ease-out;
 			content: '';
-			background: #3D4852;
+			background: #3d4852;
 			top: 5px;
 		}
 		&::after {
@@ -17,9 +21,9 @@
 			position: absolute;
 			width: 100%;
 			height: 100%;
-			transition: all .2s ease-out;
+			transition: all 0.2s ease-out;
 			content: '';
-			background: #3D4852;
+			background: #3d4852;
 			top: -5px;
 		}
 	}

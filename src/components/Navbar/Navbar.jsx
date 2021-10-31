@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink, } from 'react-router-dom';
 import './Navbar.scss';
 const Navbar = () => {
 	return (
@@ -16,9 +17,7 @@ const Navbar = () => {
 						clipRule='evenodd'
 					/>
 				</svg>
-				<span className='font-semibold text-xl tracking-tight'>
-				EveryRupee  
-				</span>
+				<span className='font-semibold text-xl tracking-tight'>EveryRupee</span>
 			</div>
 
 			<input className='menu-btn hidden' type='checkbox' id='menu-btn' />
@@ -30,35 +29,37 @@ const Navbar = () => {
 
 			<ul className='menu border-b md:border-none flex justify-end list-reset m-0 w-full md:w-auto'>
 				<li className='border-t md:border-none'>
-					<a
-						href='/'
-						className='block md:inline-block px-4 py-3 no-underline text-grey-darkest hover:text-grey-darker '>
+					<NavLink
+						to='/home'
+						id='home'
+						className='block md:inline-block px-4 py-3   text-grey-darkest hover:text-grey-darker'
+						>
 						Home
-					</a>
+					</NavLink>
 				</li>
 
 				<li className='border-t md:border-none'>
-					<a
-						href='/about/'
-						className='block md:inline-block px-4 py-3 no-underline text-grey-darkest hover:text-grey-darker'>
+					<NavLink
+						to='/about'
+						className='block md:inline-block px-4 py-3 text-grey-darkest hover:text-grey-darker'>
 						About
-					</a>
+					</NavLink>
 				</li>
 
 				<li className='border-t md:border-none'>
-					<a
-						href='/login/'
-						className='block md:inline-block px-4 py-3 no-underline text-grey-darkest hover:text-grey-darker'>
+					<NavLink
+						to='/login'
+						className='block md:inline-block px-4 py-3 text-grey-darkest hover:text-grey-darker'>
 						Log In
-					</a>
+					</NavLink>
 				</li>
 
-                <li className='border-t md:border-none'>
-					<a
-						href='/signup/'
-						className='block md:inline-block px-4 py-3 no-underline text-grey-darkest hover:text-grey-darker'>
+				<li className='border-t md:border-none'>
+					<NavLink
+						to='/signup'
+						className='block md:inline-block px-4 py-3 text-grey-darkest hover:text-grey-darker'>
 						Sign Up
-					</a>
+					</NavLink>
 				</li>
 			</ul>
 		</nav>

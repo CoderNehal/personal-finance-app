@@ -1,0 +1,55 @@
+@media (max-width: 767px) {
+	.navicon {
+		width: 1.125em;
+		height: .125em;
+		&::before {
+			display: block;
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			transition: all .2s ease-out;
+			content: '';
+			background: #3D4852;
+			top: 5px;
+		}
+		&::after {
+			display: block;
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			transition: all .2s ease-out;
+			content: '';
+			background: #3D4852;
+			top: -5px;
+		}
+	}
+	.menu-btn {
+		&:not(:checked) {
+			~ {
+				.menu {
+					display: none;
+				}
+			}
+		}
+		&:checked {
+			~ {
+				.menu {
+					display: block;
+				}
+				.menu-icon {
+					.navicon {
+						background: transparent;
+						&::before {
+							transform: rotate(-45deg);
+							top: 0;
+						}
+						&::after {
+							transform: rotate(45deg);
+							top: 0;
+						}
+					}
+				}
+			}
+		}
+	}
+}

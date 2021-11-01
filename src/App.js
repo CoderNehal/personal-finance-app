@@ -4,7 +4,8 @@ import Home from "./components/Home/Home";
 import About from "./components/About/About";
 import Auth from './components/Auth/Auth'
 import Login from "./components/Login/Login";
-import { useEffect } from "react";
+import ToRedirect from "./components/ToRedirect/ToRedirect";
+
 
 const App = () => {
   
@@ -33,6 +34,7 @@ const App = () => {
           <Route path='/home' exact component={Home} />
           <Route path="/about" exact component={About} />
           <Route path="/login" exact component={Login} />
+          <Route path="/" exact component={ToRedirect} />
 
         </Switch>
       </div>

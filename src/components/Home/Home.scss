@@ -5,3 +5,174 @@
 .totalThisYear {
 	color: red;
 }
+.btn {
+	letter-spacing: 1px;
+	text-decoration: none;
+
+	cursor: pointer;
+	transition: ease-out 0.5s;
+	-webkit-transition: ease-out 0.5s;
+	-moz-transition: ease-out 0.5s;
+}
+.btn-border-1 {
+	&::after {
+		position: absolute;
+		content: '';
+		width: 0%;
+		height: 0%;
+		visibility: hidden;
+		margin-right: 1px;
+		border-radius: 0.25rem;
+		bottom: -2px;
+		right: -2px;
+		border-left: 2.5px solid #150485;
+		border-bottom: 2.5px solid #150485;
+		transition: width 0.1s ease 0.1s, height 0.1s ease, visibility 0s 0.2s;
+	}
+	&::before {
+		position: absolute;
+		content: '';
+		width: 0%;
+		height: 0%;
+		visibility: hidden;
+		margin-left: 1px;
+		border-radius: 0.25rem;
+		top: -2px;
+		left: -2px;
+		border-top: 2.5px solid #150485;
+		border-right: 2.5px solid #150485;
+		transition: width 0.1s ease 0.3s, height 0.1s ease 0.2s, visibility 0s 0.4s;
+	}
+	&:hover {
+		animation: 1s ease-out 0.4s;
+
+		&::after {
+			width: calc(100% + 2px);
+			height: calc(100% + 2px);
+			visibility: visible;
+			transition: width 0.1s ease 0.2s, height 0.1s ease 0.3s,
+				visibility 0s 0.2s;
+			transition: width 0.1s ease 0.2s, height 0.1s ease 0.3s,
+				visibility 0s 0.2s;
+		}
+		&::before {
+			width: calc(100% + 2px);
+			height: calc(100% + 2px);
+			visibility: visible;
+			transition: width 0.1s ease 0.2s, height 0.1s ease 0.3s,
+				visibility 0s 0.2s;
+			transition: width 0.1s ease, height 0.1s ease 0.1s;
+		}
+	}
+}
+
+/* The icon */
+/* The tooltip */
+/* The pointer of the tooltip */
+/* Prevents the tooltip from being hidden */
+/* CSS animation */
+
+@mixin keyframes($animation-name) {
+	@-webkit-keyframes #{$animation-name} {
+		@content;
+	}
+	@-moz-keyframes #{$animation-name} {
+		@content;
+	}
+	@-ms-keyframes #{$animation-name} {
+		@content;
+	}
+	@-o-keyframes #{$animation-name} {
+		@content;
+	}
+	@keyframes #{$animation-name} {
+		@content;
+	}
+}
+
+@mixin animation($str) {
+	-webkit-animation: #{$str};
+	-moz-animation: #{$str};
+	-ms-animation: #{$str};
+	-o-animation: #{$str};
+	animation: #{$str};
+}
+@include keyframes(fadeIn) {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 100%;
+	}
+}
+
+.help-tip {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	margin: auto;
+	text-align: center;
+	border: 2px solid #fff;
+	border-radius: 50%;
+	width: 40px;
+	height: 40px;
+	font-size: 24px;
+	line-height: 42px;
+	cursor: default;
+	&:before {
+		content: '?';
+
+		font-family: sans-serif;
+		font-weight: normal;
+		color: #fff;
+	}
+	&:hover {
+		p {
+			display: block;
+			transform-origin: 10% 0%;
+			-webkit-animation: fadeIn 0.3s ease;
+			animation: fadeIn 0.3s ease;
+		}
+	}
+	p {
+		display: none;
+		font-family: sans-serif;
+		text-rendering: optimizeLegibility;
+		-webkit-font-smoothing: antialiased;
+		text-align: center;
+		background-color: #ffffff;
+		padding: 12px 16px;
+		width: 178px;
+		height: auto;
+		position: absolute;
+		left: 50%;
+		transform: translate(-120%, -70%);
+		border-radius: 3px;
+		box-shadow: 0 0px 20px 0 rgba(0, 0, 0, 0.1);
+		color: #37393d;
+		font-size: 12px;
+		line-height: 18px;
+		z-index: 99;
+
+		&:before {
+			position: absolute;
+			content: '';
+			width: 0;
+			height: 0;
+			border: 10px solid transparent;
+			border-left-color: #ffffff;
+			top: 50%;
+			right: -16%;
+			transform: translate(-50%, -50%);
+		}
+		&:after {
+			width: 10px;
+			height: 40px;
+			content: '';
+			position: absolute;
+			top: -40px;
+			left: 0;
+		}
+	}
+}

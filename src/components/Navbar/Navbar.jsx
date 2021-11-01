@@ -1,7 +1,9 @@
-import React from 'react';
-import { NavLink, } from 'react-router-dom';
+import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import './Navbar.scss';
+
 const Navbar = () => {
+	const [isLogged, setisLogged] = useState(localStorage.getItem('isLogged'));
 	return (
 		<nav className='nav flex flex-wrap items-center justify-between px-16 py-4'>
 			<div className='flex flex-no-shrink items-center mr-6 py-3 text-grey-darkest'>
@@ -31,9 +33,7 @@ const Navbar = () => {
 				<li className='border-t md:border-none'>
 					<NavLink
 						to='/home'
-						id='home'
-						className='block md:inline-block px-4 py-3   text-grey-darkest hover:text-grey-darker'
-						>
+						className='block md:inline-block px-4 py-3   text-grey-darkest hover:text-grey-darker'>
 						Home
 					</NavLink>
 				</li>
@@ -46,21 +46,36 @@ const Navbar = () => {
 					</NavLink>
 				</li>
 
-				<li className='border-t md:border-none'>
-					<NavLink
-						to='/login'
-						className='block md:inline-block px-4 py-3 text-grey-darkest hover:text-grey-darker'>
-						Log In
-					</NavLink>
-				</li>
+				{isLogged ? (
+					<li className='border-t md:border-none'>
+						<button
+							className='block md:inline-block px-4 py-3 text-red hover:text-grey-darker'
+							onClick={() => {
+								setisLogged(false);
+							}}
+							style={{ color: 'red' }}>
+							Logout
+						</button>
+					</li>
+				) : (
+					<>
+						<li className='border-t md:border-none'>
+							<NavLink
+								to='/login'
+								className='block md:inline-block px-4 py-3 text-grey-darkest hover:text-grey-darker'>
+								Log In
+							</NavLink>
+						</li>
 
-				<li className='border-t md:border-none'>
-					<NavLink
-						to='/signup'
-						className='block md:inline-block px-4 py-3 text-grey-darkest hover:text-grey-darker'>
-						Sign Up
-					</NavLink>
-				</li>
+						<li className='border-t md:border-none'>
+							<NavLink
+								to='/signup'
+								className='block md:inline-block px-4 py-3 text-grey-darkest hover:text-grey-darker'>
+								Sign Up
+							</NavLink>
+						</li>
+					</>
+				)}
 			</ul>
 		</nav>
 	);

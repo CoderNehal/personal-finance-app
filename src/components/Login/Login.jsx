@@ -7,6 +7,7 @@ const Login = () => {
 				className=''
 				onClick={() => {
 					Auth.authenticate();
+					
 				}}>
 				Login
 			</div>
@@ -14,7 +15,10 @@ const Login = () => {
 				className=''
 				onClick={() => {
 					Auth.signout();
-				}}>Sign Out</div>
+					
+				}}>
+				Sign Out
+			</div>
 		</>
 	);
 };

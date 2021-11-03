@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Home.scss';
 import { Link } from 'react-router-dom';
 const Home = () => {
+	const [Balance, setBalance] = useState(34680);
+	const [SpentLastMonth, setSpentLastMonth] = useState(123443);
+	const [SpentLastYear, setSpentLastYear] = useState(12354443);
 	return (
 		<div className=' w-screen h-auto cursor-default  relative'>
 			<div className='currentAmountBox mt-6 md:mt-16 rounded-md mx-auto w-11/12 border flex flex-col justify-between items-center font-semibold  bg-white py-3 border-gray-500  '>
 				<div className='BlankDiv'></div>
 				<div>
 					<div className='amount text-4xl  border-b-2  md:text-8xl  text-green px-5 md:px-16'>
-						₹ 122121
+						₹ {Balance.toLocaleString()}
 					</div>
 					<p className='text-lg text-center  text-green pt-3'>Total Balance</p>
 				</div>
@@ -17,13 +20,13 @@ const Home = () => {
 						<p className='border-b-2 mb-2 px-1 md:px-8'>
 							Total Spent Last Month
 						</p>
-						₹ 12921
+						₹ {SpentLastMonth.toLocaleString()}
 					</div>
 					<div className='totalThisYear text-md md:text-xl   text-center p-4 '>
 						<p className='border-b-2 mb-2 px-1 md:px-8'>
 							Total Spent This Year
 						</p>
-						₹ 346282
+						₹ {SpentLastYear.toLocaleString()}
 					</div>
 				</div>
 			</div>

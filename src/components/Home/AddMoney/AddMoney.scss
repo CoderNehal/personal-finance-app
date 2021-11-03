@@ -1,0 +1,22 @@
+.AddMoneyContainer {
+	min-height: 40rem;
+	@media (min-width: 998px) {
+		height: 40rem;
+	}
+}
+/* Chrome, Safari, Edge, Opera */
+/* Firefox */
+input {
+	&::-webkit-outer-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+	&::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+}
+input[type='number'] {
+	-moz-appearance: textfield;
+	outline: none;
+}

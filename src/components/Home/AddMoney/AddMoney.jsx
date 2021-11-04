@@ -70,7 +70,7 @@ const AddMoney = () => {
 		}
 	};
 	return (
-		<div className='AddMoneyContainer p-8 '>
+		<div className='AddMoneyContainer p-8 bg-secondary'>
 			<div className='flex flex-col md:flex-row justify-between h-full items-center '>
 				<div className=' w-1/2 h-full flex flex-col'>
 					<motion.div
@@ -121,10 +121,10 @@ const AddMoney = () => {
 								variants={container}
 								initial='hidden'
 								animate='visible'
-								className='MoneyOptions flex justify-between items-center w-3/4 h-60 lg:h-1/2 flex-wrap px-10 s'>
+								className='MoneyOptions grid grid-cols-2 gap-3  sm:flex sm:justify-between sm:items-center sm:w-3/4 h-60 lg:h-1/2 flex-wrap px-10'>
 								<motion.div
 									variants={item}
-									className='py-1 px-3 cursor-pointer rounded-md border-2 text-lg border-primary  text-primary'
+									className='py-1 px-3 cursor-pointer rounded-md my-auto text-center border-2 text-lg border-primary  text-primary'
 									onClick={(e) => {
 										setAmoutToAdd(100);
 									}}>
@@ -132,7 +132,7 @@ const AddMoney = () => {
 								</motion.div>
 								<motion.div
 									variants={item}
-									className='py-1 px-3 cursor-pointer rounded-md border-2 text-lg border-primary  text-primary'
+									className='py-1 px-3 cursor-pointer rounded-md my-auto text-center border-2 text-lg border-primary  text-primary'
 									onClick={(e) => {
 										setAmoutToAdd(200);
 									}}>
@@ -140,7 +140,7 @@ const AddMoney = () => {
 								</motion.div>
 								<motion.div
 									variants={item}
-									className='py-1 px-3 cursor-pointer rounded-md border-2 text-lg border-primary  text-primary'
+									className='py-1 px-3 cursor-pointer rounded-md my-auto text-center border-2 text-lg border-primary  text-primary'
 									onClick={(e) => {
 										setAmoutToAdd(400);
 									}}>
@@ -148,7 +148,7 @@ const AddMoney = () => {
 								</motion.div>
 								<motion.div
 									variants={item}
-									className='py-1 px-3 cursor-pointer rounded-md border-2 text-lg border-primary  text-primary'
+									className='py-1 px-3 cursor-pointer rounded-md my-auto text-center border-2 text-lg border-primary  text-primary'
 									onClick={(e) => {
 										setAmoutToAdd(800);
 									}}>
@@ -156,7 +156,7 @@ const AddMoney = () => {
 								</motion.div>
 								<motion.div
 									variants={item}
-									className='py-1 px-2 cursor-pointer rounded-md border-2 text-lg border-primary  text-primary'
+									className='py-1 px-2 cursor-pointer rounded-md my-auto text-center border-2 text-lg border-primary  text-primary'
 									onClick={(e) => {
 										setAmoutToAdd(1200);
 									}}>
@@ -164,7 +164,7 @@ const AddMoney = () => {
 								</motion.div>
 								<motion.div
 									variants={item}
-									className='py-1 px-2 cursor-pointer rounded-md border-2 text-lg border-primary  text-primary'
+									className='py-1 px-2 cursor-pointer rounded-md my-auto text-center border-2 text-lg border-primary  text-primary'
 									onClick={(e) => {
 										setAmoutToAdd(1600);
 									}}>
@@ -172,7 +172,7 @@ const AddMoney = () => {
 								</motion.div>
 								<motion.div
 									variants={item}
-									className='py-1 px-2 cursor-pointer rounded-md border-2 text-lg border-primary  text-primary'
+									className='py-1 px-2 cursor-pointer rounded-md my-auto text-center border-2 text-lg border-primary  text-primary'
 									onClick={(e) => {
 										setAmoutToAdd(2000);
 									}}>
@@ -180,7 +180,7 @@ const AddMoney = () => {
 								</motion.div>
 								<motion.div
 									variants={item}
-									className='py-1 px-2 cursor-pointer rounded-md border-2 text-lg border-primary  text-primary'
+									className='py-1 px-2 cursor-pointer rounded-md my-auto text-center border-2 text-lg border-primary  text-primary'
 									onClick={(e) => {
 										setAmoutToAdd(2500);
 									}}>

@@ -4,7 +4,7 @@ import Cash from '../../../images/cash.png';
 import PassiveIncome from '../../../images/PassiveIncome.png';
 import Other from '../../../images/Other.png';
 import { useInView } from 'react-intersection-observer';
-import { motion, useAnimation } from 'framer-motion';
+import { motion, useAnimation, AnimatePresence } from 'framer-motion';
 import AnimatedNumber from 'animated-number-react';
 const container = {
 	hidden: { opacity: 1, scale: 0 },
@@ -30,13 +30,13 @@ const AddMoney = () => {
 	const [UpdatedBalance, setUpdatedBalance] = useState(34680);
 	const [AmoutToAdd, setAmoutToAdd] = useState(0);
 	const [ModeOFIncome, setModeOFIncome] = useState(null);
+	const [ShowAlert, setShowAlert] = useState(false);
 	const { ref, inView } = useInView({
 		threshold: 1,
 	});
 	const animation = useAnimation();
 	useEffect(() => {
 		if (inView) {
-			
 			animation.start({ rotate: 0, scale: 1 });
 		}
 	}, [inView]);
@@ -67,10 +67,11 @@ const AddMoney = () => {
 				'Mode of payment:',
 				ModeOFIncome
 			);
+			setShowAlert(true);
 		}
 	};
 	return (
-		<div className='AddMoneyContainer p-8 bg-secondary'>
+		<div className='AddMoneyContainer p-8 bg-secondary relative'>
 			<div className='flex flex-col md:flex-row justify-between h-full items-center '>
 				<div className=' w-1/2 h-full flex flex-col'>
 					<motion.div
@@ -277,6 +278,50 @@ const AddMoney = () => {
 					</div>
 				</div>
 			</div>
+			<AnimatePresence>
+				{ShowAlert ? (
+					<motion.div
+						initial={{ x: '100vw' }}
+						animate={{ x: 0 }}
+						exit={{ opacity: 0 ,transition:'all 0.5s ease-out' }}
+						transition={{ duration: 1 }}
+						className='absolute right-3 bottom-6 w-3/4 sm:w-1/4 p-2 py-1 bg-green items-center text-indigo-100 leading-none rounded-md flex lg:inline-flex'
+						role='alert'>
+						<span className='flex rounded-full bg-green uppercase px-2 py-1 text-sm font-bold mr-3'>
+							<svg
+								xmlns='http://www.w3.org/2000/svg'
+								className='h-6 w-6'
+								fill='none'
+								viewBox='0 0 24 24'
+								stroke='currentColor'>
+								<path
+									strokeLinecap='round'
+									strokeLinejoin='round'
+									strokeWidth={2}
+									d='M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z'
+								/>
+							</svg>
+						</span>
+						<span className=' text-sm font-semibold mr-2 text-center flex-auto'>
+							Successfully added money!
+						</span>
+						<svg
+							onClick={() => setShowAlert(false)}
+							xmlns='http://www.w3.org/2000/svg'
+							className='h-6 w-6 cursor-pointer'
+							fill='none'
+							viewBox='0 0 24 24'
+							stroke='currentColor'>
+							<path
+								strokeLinecap='round'
+								strokeLinejoin='round'
+								strokeWidth={2}
+								d='M6 18L18 6M6 6l12 12'
+							/>
+						</svg>
+					</motion.div>
+				) : null}
+			</AnimatePresence>
 		</div>
 	);
 };

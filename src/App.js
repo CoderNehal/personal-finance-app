@@ -29,7 +29,8 @@ const App = () => {
 
   return (
     <Router>
-      <div className=' bg-secondary h-screen m-0 text-white '>
+      
+      <div className=' bg-secondary h-screen m-0 text-white overflow-x-hidden '>
         <Navbar />
         <Switch>
           <Route path='/home' exact component={Home} />

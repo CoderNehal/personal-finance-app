@@ -7,7 +7,7 @@ const Home = () => {
 	const [SpentLastMonth, setSpentLastMonth] = useState(123443);
 	const [SpentLastYear, setSpentLastYear] = useState(12354443);
 	return (
-		<div className=' w-screen h-auto cursor-default  relative'>
+		<div className=' w-screen  md:h-auto cursor-default  relative'>
 			<motion.div
 				initial={{ width: 0 }}
 				animate={{ width: '91.666667%' }}
@@ -70,7 +70,7 @@ const Home = () => {
 				</div>
 			</motion.div>
 
-			<div className='buttons flex flex-col px-12 lg:px-0 lg:flex-row justify-between items-center w-11/12 mx-auto mt-4 text-white h-52  '>
+			<div className='buttons flex flex-col px-12 lg:px-0 lg:flex-row justify-between items-center w-11/12 mx-auto mt-4 text-white h-full md:h-52  '>
 				{/* <button className='rounded text-lg btn-border-1 px-36 py-0 xl:py-4 mt-4 xl:mt-0   transition duration-200 ease-in bg-green'>
 					Add money
 				</button>
@@ -81,14 +81,14 @@ const Home = () => {
 					View History
 				</button> */}
 				<motion.div
-					initial={{ x:'-100vw' }}
-					animate={{ x:0 }}
+					initial={{ x: '-100vw' }}
+					animate={{ x: 0 }}
 					transition={{
-						duration:0.7,
+						duration: 0.7,
 						delay: 2,
 					}}>
 					<Link
-						class='btn btn-border-1 border-none outline-none px-36 py-0 xl:py-4 mt-4 xl:mt-0 rounded border-gray-300 text-lg text-center relative flex justify-center items-center text-white bg-green '
+						className='btn btn-border-1 w-3/4 sm:w-auto mx-auto  border-none outline-none px-36 py-0 xl:py-4 mt-4 xl:mt-0 rounded border-gray-300 text-sm md:text-lg text-center relative flex justify-center items-center text-white bg-green  '
 						to='/add-money'>
 						<svg
 							xmlns='http://www.w3.org/2000/svg'
@@ -107,14 +107,14 @@ const Home = () => {
 					</Link>
 				</motion.div>
 				<motion.div
-					initial={{ x:'-100vw' }}
-					animate={{ x:0 }}
+					initial={{ x: '-100vw' }}
+					animate={{ x: 0 }}
 					transition={{
-						duration:1,
+						duration: 1,
 						delay: 2,
 					}}>
 					<Link
-						class='btn btn-border-1  px-36 py-0 xl:py-4 mt-4 xl:mt-0 rounded border-gray-300 text-lg text-center relative flex justify-center items-center text-white bg-red'
+						className='btn btn-border-1 w-3/4 sm:w-auto mx-auto  px-36 py-0 xl:py-4 mt-4 xl:mt-0 rounded border-gray-300 text-sm md:text-lg text-center relative flex justify-center items-center text-white bg-red'
 						to='/spend-money'>
 						<svg
 							xmlns='http://www.w3.org/2000/svg'
@@ -134,14 +134,14 @@ const Home = () => {
 					</Link>
 				</motion.div>
 				<motion.div
-					initial={{ x:'-100vw' }}
-					animate={{ x:0 }}
+					initial={{ x: '-100vw' }}
+					animate={{ x: 0 }}
 					transition={{
-						duration:1.3,
+						duration: 1.3,
 						delay: 2,
 					}}>
 					<Link
-						class='btn btn-border-1  px-36 py-0 xl:py-4 mt-4 xl:mt-0 rounded border-gray-300 text-lg text-center relative flex justify-center items-center text-white bg-yellow-300'
+						className='btn btn-border-1 w-3/4 sm:w-auto mx-auto  px-36 py-0 xl:py-4 mt-4 xl:mt-0 rounded border-gray-300 text-sm md:text-lg text-center relative flex justify-center items-center text-white bg-yellow-300'
 						to='/view-history'>
 						<svg
 							xmlns='http://www.w3.org/2000/svg'
@@ -162,7 +162,7 @@ const Home = () => {
 				</motion.div>
 			</div>
 			<div className='rounded-full text-white text-center w-8 absolute right-8 md:right-16 mt-12	 md:mt-0'>
-				<div class='help-tip'>
+				<div className='help-tip'>
 					<p>
 						This is Fookin tip, Customize it later
 						<br />

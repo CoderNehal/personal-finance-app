@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './Home.scss';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import bg from '../../images/bg.png';
+
 const Home = () => {
 	const [Balance, setBalance] = useState(34680);
 	const [SpentLastMonth, setSpentLastMonth] = useState(123443);

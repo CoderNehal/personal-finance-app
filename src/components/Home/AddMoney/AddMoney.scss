@@ -6,9 +6,12 @@
 	background-repeat: no-repeat;
 	height: auto;
 	min-height: 88.7vh;
+	background-size: contain;
 
-	@media (min-width: 998px) {
+	@media (min-width: 768px) {
 		height: 40rem;
+	background-size: auto;
+
 	}
 }
 .bg-image {

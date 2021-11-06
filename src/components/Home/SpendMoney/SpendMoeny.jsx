@@ -6,6 +6,7 @@ import Food from '../../../images/food.png';
 import { useInView } from 'react-intersection-observer';
 import { motion, useAnimation, AnimatePresence } from 'framer-motion';
 import AnimatedNumber from 'animated-number-react';
+import { useHistory } from 'react-router';
 const container = {
 	hidden: { opacity: 1, scale: 0 },
 	visible: {
@@ -32,6 +33,7 @@ const SpendMoney = () => {
 	const [ModeOFIncome, setModeOFIncome] = useState(null);
 	const [ShowAlert, setShowAlert] = useState(false);
 
+	const history = useHistory();
 	const { ref, inView } = useInView({
 		threshold: 1,
 	});
@@ -73,6 +75,23 @@ const SpendMoney = () => {
 	};
 	return (
 		<div className='SpendMoneyContainer p-8  relative'>
+			<button
+				className=' text-black  cursor-pointer w-12 h-12 '
+				onClick={() => history.goBack()}>
+				<svg
+					xmlns='http://www.w3.org/2000/svg'
+					className='h-6 w-6 md:h-8 md:w-8 '
+					fill='none'
+					viewBox='0 0 24 24'
+					stroke='currentColor'>
+					<path
+						strokeLinecap='round'
+						strokeLinejoin='round'
+						strokeWidth={2}
+						d='M10 19l-7-7m0 0l7-7m-7 7h18'
+					/>
+				</svg>
+			</button>
 			<div className='flex flex-col md:flex-row justify-between h-full items-center  '>
 				<div className=' w-1/2 h-full flex flex-col  '>
 					<motion.div
@@ -236,7 +255,7 @@ const SpendMoney = () => {
 									}}>
 									<img src={Car} alt='' />
 									<p className='text-sm text-red font-semibold uppercase pt-0  md:pt-2  '>
-									Transport
+										Transport
 									</p>
 								</motion.div>
 								<motion.div

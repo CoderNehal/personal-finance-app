@@ -6,6 +6,7 @@ import Other from '../../../images/Other.png';
 import { useInView } from 'react-intersection-observer';
 import { motion, useAnimation, AnimatePresence } from 'framer-motion';
 import AnimatedNumber from 'animated-number-react';
+import { useHistory } from 'react-router-dom';
 const container = {
 	hidden: { opacity: 1, scale: 0 },
 	visible: {
@@ -31,7 +32,8 @@ const AddMoney = () => {
 	const [AmoutToAdd, setAmoutToAdd] = useState(0);
 	const [ModeOFIncome, setModeOFIncome] = useState(null);
 	const [ShowAlert, setShowAlert] = useState(false);
-
+	const [unMount, setunMount] = useState(false);
+	const history = useHistory();
 	const { ref, inView } = useInView({
 		threshold: 1,
 	});
@@ -73,34 +75,62 @@ const AddMoney = () => {
 	};
 	return (
 		<div className='AddMoneyContainer p-8  relative'>
+			<button
+				className=' text-black  cursor-pointer w-12 h-12 '
+				onClick={() => {
+					setunMount(true);
+					setTimeout(() => {
+						history.goBack();
+					}, 1000);
+				}}>
+				<svg
+					xmlns='http://www.w3.org/2000/svg'
+					className='h-6 w-6 md:h-8 md:w-8 '
+					fill='none'
+					viewBox='0 0 24 24'
+					stroke='currentColor'>
+					<path
+						strokeLinecap='round'
+						strokeLinejoin='round'
+						strokeWidth={2}
+						d='M10 19l-7-7m0 0l7-7m-7 7h18'
+					/>
+				</svg>
+			</button>
 			<div className='flex flex-col md:flex-row justify-between h-full items-center '>
 				<div className=' w-1/2 h-full flex flex-col '>
-					<motion.div
-						initial={{ opacity: 0, x: -50 }}
-						transition={{ duration: 1 }}
-						animate={{ opacity: 0.7, x: 0 }}
-						className='currentBalance h-1/2 text-4xl md:text-6xl flex flex-col justify-center items-center text-black'>
-						₹ {CurrentBalance.toLocaleString()}
-						<p className='text-base md:text-lg pb-4 md:pt-4 md:pb-0 text-center'>
-							Current Balance
-						</p>
-					</motion.div>
-					<motion.div
-						initial={{ opacity: 0, x: 50 }}
-						transition={{
-							duration: 1,
-						}}
-						animate={{ opacity: 1, x: 0 }}
-						className='updatedBalance h-1/2 text-4xl md:text-6xl flex flex-col justify-center items-center text-green'>
-						<AnimatedNumber
-							value={UpdatedBalance}
-							formatValue={formatValue}
-							duration={250}
-						/>
-						<p className='text-base md:text-lg pb-4 md:pt-4 md:pb-0 text-center'>
-							Balance After Adding Money
-						</p>
-					</motion.div>
+					<AnimatePresence>
+						{!unMount && (
+							<>
+								<motion.div
+									initial={{ opacity: 0, x: -50 }}
+									transition={{ duration: 1 }}
+									animate={{ opacity: 0.7, x: 0 }}
+									exit={{ opacity: 0 }}
+									className='currentBalance h-1/2 text-4xl md:text-6xl flex flex-col justify-center items-center text-black'>
+									₹ {CurrentBalance.toLocaleString()}
+									<p className='text-base md:text-lg pb-4 md:pt-4 md:pb-0 text-center'>
+										Current Balance
+									</p>
+								</motion.div>
+								<motion.div
+									initial={{ opacity: 0, x: 50 }}
+									transition={{ duration: 1 }}
+									animate={{ opacity: 1, x: 0 }}
+									exit={{ opacity: 0 }}
+									className='updatedBalance h-1/2 text-4xl md:text-6xl flex flex-col justify-center items-center text-green'>
+									<AnimatedNumber
+										value={UpdatedBalance}
+										formatValue={formatValue}
+										duration={250}
+									/>
+									<p className='text-base md:text-lg pb-4 md:pt-4 md:pb-0 text-center'>
+										Balance After Adding Money
+									</p>
+								</motion.div>
+							</>
+						)}
+					</AnimatePresence>
 				</div>
 				<div className=' w-full md:w-1/2 px-0 py-3 md:px-16 h-full  '>
 					<div className=' bg-image border h-full lg:w-11/12  flex flex-col text-black rounded-md '>

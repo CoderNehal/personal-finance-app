@@ -32,7 +32,8 @@ const SpendMoney = () => {
 	const [AmoutToAdd, setAmoutToAdd] = useState(0);
 	const [ModeOFIncome, setModeOFIncome] = useState(null);
 	const [ShowAlert, setShowAlert] = useState(false);
-
+	const [other, setother] = useState(true);
+	const [otherSelectedOption, setotherSelectedOption] = useState(null);
 	const history = useHistory();
 	const { ref, inView } = useInView({
 		threshold: 1,
@@ -44,12 +45,17 @@ const SpendMoney = () => {
 		}
 	}, [inView]);
 	const handleIncomeSource = (classList, id) => {
-		document.getElementById('Salary').classList.remove('border-red');
-		document.getElementById('Passive').classList.remove('border-red');
-		document.getElementById('Food').classList.remove('border-red');
-		classList.add('border-red');
-		console.log(id);
-		setModeOFIncome(id);
+		if (id == 'Other') {
+			return setother(true);
+		} else {
+			document.getElementById('Salary').classList.remove('border-red');
+			document.getElementById('Passive').classList.remove('border-red');
+			document.getElementById('Food').classList.remove('border-red');
+			classList.add('border-red');
+			console.log(id);
+
+			setModeOFIncome(id);
+		}
 	};
 	const formatValue = (value) => `₹ ${Number(value).toLocaleString()}`;
 	const HandleSpendMoney = () => {
@@ -75,23 +81,25 @@ const SpendMoney = () => {
 	};
 	return (
 		<div className='SpendMoneyContainer p-8  relative'>
-			<button
-				className=' text-black  cursor-pointer w-12 h-12 '
-				onClick={() => history.goBack()}>
-				<svg
-					xmlns='http://www.w3.org/2000/svg'
-					className='h-6 w-6 md:h-8 md:w-8 '
-					fill='none'
-					viewBox='0 0 24 24'
-					stroke='currentColor'>
-					<path
-						strokeLinecap='round'
-						strokeLinejoin='round'
-						strokeWidth={2}
-						d='M10 19l-7-7m0 0l7-7m-7 7h18'
-					/>
-				</svg>
-			</button>
+			<div className='absolute cursor-pointer w-12 h-12 '>
+				<button
+					className=' absolute text-black  '
+					onClick={() => history.goBack()}>
+					<svg
+						xmlns='http://www.w3.org/2000/svg'
+						className='h-6 w-6 md:h-8 md:w-8 '
+						fill='none'
+						viewBox='0 0 24 24'
+						stroke='currentColor'>
+						<path
+							strokeLinecap='round'
+							strokeLinejoin='round'
+							strokeWidth={2}
+							d='M10 19l-7-7m0 0l7-7m-7 7h18'
+						/>
+					</svg>
+				</button>
+			</div>
 			<div className='flex flex-col md:flex-row justify-between h-full items-center  '>
 				<div className=' w-1/2 h-full flex flex-col  '>
 					<motion.div
@@ -127,159 +135,247 @@ const SpendMoney = () => {
 							<div className='text-red text-lg lg:text-xl'>
 								How much would you like to spend?
 							</div>
-							<div className='-ml-4 py-6 lg:py-0'>
-								<div className='flex justify-center items-center text-primary text-xl'>
-									₹
-									<input
-										className='bg-transparent border-b-2 w-1/3 text-center ml-4 '
-										type='number'
-										value={AmoutToAdd}
-										onChange={(e) => setAmoutToAdd(Number(e.target.value))}
-									/>
+							{other ? (
+								<div className=' py-12  flex justify-around'>
+									<motion.div
+										initial={{ opacity: 0 }}
+										animate={{ opacity: 1 }}
+										transition={{
+											duration: 1,
+										}}
+										className=' h-28 lg:h-11/12 w-20 lg:w-1/4 border-2 cursor-pointer flex flex-col items-center justify-center  px-8 border-black '
+										id='Other'
+										onClick={(e) => {
+											handleIncomeSource(
+												e.currentTarget.classList,
+												e.currentTarget.id
+											);
+										}}>
+										<img src={Food} alt='' />
+										<p className='text-sm text-red font-semibold uppercase pt-0  md:pt-3'>
+											Other
+										</p>
+									</motion.div>
+
+									<div className='dropdown inline-block relative w-1/4'>
+										<button className='bg-gray-300 text-gray-500 font-semibold py-2 px-4 rounded inline-flex items-center'>
+											<span className='mr-1'>
+												{otherSelectedOption
+													? otherSelectedOption
+													: 'Type of expense'}
+											</span>
+											<svg
+												className='fill-current h-4 w-4'
+												xmlns='http://www.w3.org/2000/svg'
+												viewBox='0 0 20 20'>
+												<path d='M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z' />{' '}
+											</svg>
+										</button>
+										<ul className='dropdown-menu absolute hidden text-gray-500 pt-1'>
+											<li className=''>
+												<p
+													onClick={(e) =>
+														setotherSelectedOption(e.currentTarget.innerText)
+													}
+													className='rounded bg-white text-black hover:bg-gray-200 py-2 px-4 block whitespace-no-wrap cursor-pointer '>
+													Food
+												</p>
+											</li>
+											<li className=''>
+												<p
+													onClick={(e) =>
+														setotherSelectedOption(e.currentTarget.innerText)
+													}
+													className='rounded bg-white hover:border hover:border-red hover:border-l-2 text-black hover:bg-gray-200 py-2 px-4 block whitespace-no-wrap cursor-pointer'>
+													Utilities
+												</p>
+											</li>
+											<li className=''>
+												<p
+													onClick={(e) =>
+														setotherSelectedOption(e.currentTarget.innerText)
+													}
+													className='rounded bg-white hover:border hover:border-red hover:border-l-2 text-black hover:bg-gray-200 py-2 px-4 block whitespace-no-wrap cursor-pointer'>
+													Medical 
+												</p>
+											</li>
+											<li className=''>
+												<p
+													onClick={(e) =>
+														setotherSelectedOption(e.currentTarget.innerText)
+													}
+													className='rounded bg-white hover:border hover:border-red hover:border-l-2 text-black hover:bg-gray-200 py-2 px-4 block whitespace-no-wrap cursor-pointer'>
+													 Entertainment
+												</p>
+											</li>
+										</ul>
+									</div>
 								</div>
-							</div>
-							<motion.div
-								variants={container}
-								initial='hidden'
-								animate='visible'
-								className='MoneyOptions grid grid-cols-2 gap-3  sm:flex sm:justify-between sm:items-center sm:w-3/4 h-60 lg:h-1/2 flex-wrap px-10'>
-								<motion.div
-									variants={item}
-									className='py-1 px-3 cursor-pointer rounded-md my-auto text-center border-2 text-lg border-red  text-primary hover:bg-red hover:text-white transition-all duration-400 ease-in-out'
-									onClick={(e) => {
-										setAmoutToAdd(100);
-									}}>
-									₹ 100
-								</motion.div>
-								<motion.div
-									variants={item}
-									className='py-1 px-3 cursor-pointer rounded-md my-auto text-center border-2 text-lg border-red  text-primary hover:bg-red hover:text-white transition-all duration-400 ease-in-out'
-									onClick={(e) => {
-										setAmoutToAdd(200);
-									}}>
-									₹ 200
-								</motion.div>
-								<motion.div
-									variants={item}
-									className='py-1 px-3 cursor-pointer rounded-md my-auto text-center border-2 text-lg border-red  text-primary hover:bg-red hover:text-white transition-all duration-400 ease-in-out'
-									onClick={(e) => {
-										setAmoutToAdd(400);
-									}}>
-									₹ 400
-								</motion.div>
-								<motion.div
-									variants={item}
-									className='py-1 px-3 cursor-pointer rounded-md my-auto text-center border-2 text-lg border-red  text-primary hover:bg-red hover:text-white transition-all duration-400 ease-in-out'
-									onClick={(e) => {
-										setAmoutToAdd(800);
-									}}>
-									₹ 800
-								</motion.div>
-								<motion.div
-									variants={item}
-									className='py-1 px-2 cursor-pointer rounded-md my-auto text-center border-2 text-lg border-red  text-primary hover:bg-red hover:text-white transition-all duration-400 ease-in-out'
-									onClick={(e) => {
-										setAmoutToAdd(1200);
-									}}>
-									₹ 1200
-								</motion.div>
-								<motion.div
-									variants={item}
-									className='py-1 px-2 cursor-pointer rounded-md my-auto text-center border-2 text-lg border-red  text-primary hover:bg-red hover:text-white transition-all duration-400 ease-in-out'
-									onClick={(e) => {
-										setAmoutToAdd(1600);
-									}}>
-									₹ 1600
-								</motion.div>
-								<motion.div
-									variants={item}
-									className='py-1 px-2 cursor-pointer rounded-md my-auto text-center border-2 text-lg border-red  text-primary hover:bg-red hover:text-white transition-all duration-400 ease-in-out'
-									onClick={(e) => {
-										setAmoutToAdd(2000);
-									}}>
-									₹ 2000
-								</motion.div>
-								<motion.div
-									variants={item}
-									className='py-1 px-2 cursor-pointer rounded-md my-auto text-center border-2 text-lg border-red  text-primary hover:bg-red hover:text-white transition-all duration-400 ease-in-out'
-									onClick={(e) => {
-										setAmoutToAdd(2500);
-									}}>
-									₹ 2500
-								</motion.div>
-							</motion.div>
+							) : (
+								<>
+									<div className='-ml-4 py-6 lg:py-0'>
+										<div className='flex justify-center items-center text-primary text-xl'>
+											₹
+											<input
+												className='bg-transparent border-b-2 w-1/3 text-center ml-4 '
+												type='number'
+												value={AmoutToAdd}
+												onChange={(e) => setAmoutToAdd(Number(e.target.value))}
+											/>
+										</div>
+									</div>
+									<motion.div
+										variants={container}
+										initial='hidden'
+										animate='visible'
+										className='MoneyOptions grid grid-cols-2 gap-3  sm:flex sm:justify-between sm:items-center sm:w-3/4 h-60 lg:h-1/2 flex-wrap px-10'>
+										<motion.div
+											variants={item}
+											className='py-1 px-3 cursor-pointer rounded-md my-auto text-center border-2 text-lg border-red  text-primary hover:bg-red hover:text-white transition-all duration-400 ease-in-out'
+											onClick={(e) => {
+												setAmoutToAdd(100);
+											}}>
+											₹ 100
+										</motion.div>
+										<motion.div
+											variants={item}
+											className='py-1 px-3 cursor-pointer rounded-md my-auto text-center border-2 text-lg border-red  text-primary hover:bg-red hover:text-white transition-all duration-400 ease-in-out'
+											onClick={(e) => {
+												setAmoutToAdd(200);
+											}}>
+											₹ 200
+										</motion.div>
+										<motion.div
+											variants={item}
+											className='py-1 px-3 cursor-pointer rounded-md my-auto text-center border-2 text-lg border-red  text-primary hover:bg-red hover:text-white transition-all duration-400 ease-in-out'
+											onClick={(e) => {
+												setAmoutToAdd(400);
+											}}>
+											₹ 400
+										</motion.div>
+										<motion.div
+											variants={item}
+											className='py-1 px-3 cursor-pointer rounded-md my-auto text-center border-2 text-lg border-red  text-primary hover:bg-red hover:text-white transition-all duration-400 ease-in-out'
+											onClick={(e) => {
+												setAmoutToAdd(800);
+											}}>
+											₹ 800
+										</motion.div>
+										<motion.div
+											variants={item}
+											className='py-1 px-2 cursor-pointer rounded-md my-auto text-center border-2 text-lg border-red  text-primary hover:bg-red hover:text-white transition-all duration-400 ease-in-out'
+											onClick={(e) => {
+												setAmoutToAdd(1200);
+											}}>
+											₹ 1200
+										</motion.div>
+										<motion.div
+											variants={item}
+											className='py-1 px-2 cursor-pointer rounded-md my-auto text-center border-2 text-lg border-red  text-primary hover:bg-red hover:text-white transition-all duration-400 ease-in-out'
+											onClick={(e) => {
+												setAmoutToAdd(1600);
+											}}>
+											₹ 1600
+										</motion.div>
+										<motion.div
+											variants={item}
+											className='py-1 px-2 cursor-pointer rounded-md my-auto text-center border-2 text-lg border-red  text-primary hover:bg-red hover:text-white transition-all duration-400 ease-in-out'
+											onClick={(e) => {
+												setAmoutToAdd(2000);
+											}}>
+											₹ 2000
+										</motion.div>
+										<motion.div
+											variants={item}
+											className='py-1 px-2 cursor-pointer rounded-md my-auto text-center border-2 text-lg border-red  text-primary hover:bg-red hover:text-white transition-all duration-400 ease-in-out'
+											onClick={(e) => {
+												setAmoutToAdd(2500);
+											}}>
+											₹ 2500
+										</motion.div>
+									</motion.div>
+								</>
+							)}
 						</div>
-						<div className='lowerPart h-1/2 flex flex-col justify-between items-center py-3'>
-							<div className='text-red text-lg lg:text-xl'>
-								Where did the money go?
-							</div>
-							<motion.div
-								ref={ref}
-								className='lg:px-8 py-6 flex h-full w-3/4 justify-between items-center'>
-								<motion.div
-									initial={{ scale: 0, rotate: 180 }}
-									animate={animation}
-									transition={{
-										type: 'spring',
-										stiffness: 260,
-										damping: 40,
-									}}
-									className=' h-28 lg:h-11/12 w-20 lg:w-1/4 border-2 cursor-pointer flex flex-col items-center justify-center  px-3 '
-									id='Salary'
-									onClick={(e) => {
-										handleIncomeSource(
-											e.currentTarget.classList,
-											e.currentTarget.id
-										);
-									}}>
-									<img src={Home} alt='' />
-									<p className='text-sm text-red font-semibold uppercase pt-2 '>
-										Housing
-									</p>
-								</motion.div>
-								<motion.div
-									initial={{ scale: 0, rotate: 180 }}
-									animate={animation}
-									transition={{
-										type: 'spring',
-										stiffness: 260,
-										damping: 40,
-									}}
-									className=' h-28 lg:h-11/12 w-20 lg:w-1/4 border-2 cursor-pointer flex flex-col items-center justify-center  px-3 '
-									id='Passive'
-									onClick={(e) => {
-										handleIncomeSource(
-											e.currentTarget.classList,
-											e.currentTarget.id
-										);
-									}}>
-									<img src={Car} alt='' />
-									<p className='text-sm text-red font-semibold uppercase pt-0  md:pt-2  '>
-										Transport
-									</p>
-								</motion.div>
-								<motion.div
-									initial={{ scale: 0, rotate: 180 }}
-									animate={animation}
-									transition={{
-										type: 'spring',
-										stiffness: 260,
-										damping: 40,
-									}}
-									className=' h-28 lg:h-11/12 w-20 lg:w-1/4 border-2 cursor-pointer flex flex-col items-center justify-center  px-3 '
-									id='Food'
-									onClick={(e) => {
-										handleIncomeSource(
-											e.currentTarget.classList,
-											e.currentTarget.id
-										);
-									}}>
-									<img src={Food} alt='' />
-									<p className='text-sm text-red font-semibold uppercase pt-0  md:pt-3'>
-										Other
-									</p>
-								</motion.div>
-							</motion.div>
+
+						<div
+							className={`lowerPart h-1/2 flex flex-col ${
+								other ? ' justify-end' : 'justify-between'
+							} items-center py-3`}>
+							{other ? null : (
+								<>
+									<div className='text-red text-lg lg:text-xl'>
+										Where did the money go?
+									</div>
+									<motion.div
+										ref={ref}
+										className='lg:px-8 py-6 flex h-full w-3/4 justify-between items-center'>
+										<motion.div
+											initial={{ scale: 0, rotate: 180 }}
+											animate={animation}
+											transition={{
+												type: 'spring',
+												stiffness: 260,
+												damping: 40,
+											}}
+											className=' h-28 lg:h-11/12 w-20 lg:w-1/4 border-2 cursor-pointer flex flex-col items-center justify-center  px-3 '
+											id='Salary'
+											onClick={(e) => {
+												handleIncomeSource(
+													e.currentTarget.classList,
+													e.currentTarget.id
+												);
+											}}>
+											<img src={Home} alt='' />
+											<p className='text-sm text-red font-semibold uppercase pt-2 '>
+												Housing
+											</p>
+										</motion.div>
+										<motion.div
+											initial={{ scale: 0, rotate: 180 }}
+											animate={animation}
+											transition={{
+												type: 'spring',
+												stiffness: 260,
+												damping: 40,
+											}}
+											className=' h-28 lg:h-11/12 w-20 lg:w-1/4 border-2 cursor-pointer flex flex-col items-center justify-center  px-3 '
+											id='Passive'
+											onClick={(e) => {
+												handleIncomeSource(
+													e.currentTarget.classList,
+													e.currentTarget.id
+												);
+											}}>
+											<img src={Car} alt='' />
+											<p className='text-sm text-red font-semibold uppercase pt-0  md:pt-2  '>
+												Transport
+											</p>
+										</motion.div>
+										<motion.div
+											initial={{ scale: 0, rotate: 180 }}
+											animate={animation}
+											transition={{
+												type: 'spring',
+												stiffness: 260,
+												damping: 40,
+											}}
+											className=' h-28 lg:h-11/12 w-20 lg:w-1/4 border-2 cursor-pointer flex flex-col items-center justify-center  px-3 '
+											id='Other'
+											onClick={(e) => {
+												handleIncomeSource(
+													e.currentTarget.classList,
+													e.currentTarget.id
+												);
+											}}>
+											<img src={Food} alt='' />
+											<p className='text-sm text-red font-semibold uppercase pt-0  md:pt-3'>
+												Other
+											</p>
+										</motion.div>
+									</motion.div>
+								</>
+							)}
 							<motion.div
 								whileHover={{
 									scale: 1.1,

@@ -4,7 +4,7 @@
 	background-position: center;
 	background-repeat: no-repeat;
 	height: auto;
-	min-height: 88.7vh;
+	min-height: 86.7vh;
 	background-size: contain;
 
 	@media (min-width: 768px) {
@@ -34,4 +34,11 @@ input {
 input[type='number'] {
 	-moz-appearance: textfield;
 	outline: none;
+}
+.dropdown {
+	&:hover {
+		.dropdown-menu {
+			display: block;
+		}
+	}
 }

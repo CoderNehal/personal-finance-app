@@ -90,7 +90,7 @@ const Home = () => {
 					animate={{ x: 0 }}
 					transition={{
 						duration: 0.7,
-						delay: 2,
+						
 					}}>
 					<Link
 						className='btn btn-border-1 w-3/4 sm:w-auto mx-auto  border-none outline-none px-36 py-0 xl:py-4 mt-4 xl:mt-0 rounded border-gray-300 text-sm md:text-lg text-center relative flex justify-center items-center text-white bg-green  '
@@ -116,7 +116,7 @@ const Home = () => {
 					animate={{ x: 0 }}
 					transition={{
 						duration: 1,
-						delay: 2,
+						
 					}}>
 					<Link
 						className='btn btn-border-1 w-3/4 sm:w-auto mx-auto  px-36 py-0 xl:py-4 mt-4 xl:mt-0 rounded border-gray-300 text-sm md:text-lg text-center relative flex justify-center items-center text-white bg-red'
@@ -143,7 +143,7 @@ const Home = () => {
 					animate={{ x: 0 }}
 					transition={{
 						duration: 1.3,
-						delay: 2,
+						
 					}}>
 					<Link
 						className='btn btn-border-1 w-3/4 sm:w-auto mx-auto  px-36 py-0 xl:py-4 mt-4 xl:mt-0 rounded border-gray-300 text-sm md:text-lg text-center relative flex justify-center items-center text-white bg-yellow-300'

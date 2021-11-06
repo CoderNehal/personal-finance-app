@@ -76,7 +76,7 @@ const AddMoney = () => {
 	return (
 		<div className='AddMoneyContainer p-8  relative'>
 			<button
-				className=' text-black  cursor-pointer w-12 h-12 '
+				className=' absolute text-black  cursor-pointer w-12 h-12 '
 				onClick={() => {
 					setunMount(true);
 					setTimeout(() => {

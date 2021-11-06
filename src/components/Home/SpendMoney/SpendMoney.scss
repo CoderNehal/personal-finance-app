@@ -1,0 +1,36 @@
+.SpendMoneyContainer {
+	background: url('../../../images/spendMoneyBg.jpg');
+
+	background-position: center;
+	background-repeat: no-repeat;
+	height: auto;
+	min-height: 88.7vh;
+
+	@media (min-width: 998px) {
+		height: 40rem;
+	}
+}
+.bg-blur {
+	background: rgba(255, 255, 255, 0.25);
+	box-shadow: 0 8px 12px 0 #1504857c;
+	backdrop-filter: blur(4px);
+	-webkit-backdrop-filter: blur(4px);
+	border-radius: 10px;
+}
+/* Chrome, Safari, Edge, Opera */
+/* Firefox */
+input {
+	&::-webkit-outer-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+	&::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+}
+input[type='number'] {
+	-moz-appearance: textfield;
+	outline: none;
+}
+

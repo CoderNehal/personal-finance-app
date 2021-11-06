@@ -31,6 +31,7 @@ const AddMoney = () => {
 	const [AmoutToAdd, setAmoutToAdd] = useState(0);
 	const [ModeOFIncome, setModeOFIncome] = useState(null);
 	const [ShowAlert, setShowAlert] = useState(false);
+
 	const { ref, inView } = useInView({
 		threshold: 1,
 	});
@@ -71,14 +72,14 @@ const AddMoney = () => {
 		}
 	};
 	return (
-		<div className='AddMoneyContainer p-8 bg-secondary relative'>
+		<div className='AddMoneyContainer p-8  relative'>
 			<div className='flex flex-col md:flex-row justify-between h-full items-center '>
-				<div className=' w-1/2 h-full flex flex-col'>
+				<div className=' w-1/2 h-full flex flex-col '>
 					<motion.div
 						initial={{ opacity: 0, x: -50 }}
 						transition={{ duration: 1 }}
 						animate={{ opacity: 0.7, x: 0 }}
-						className='currentBalance h-1/2 text-4xl md:text-6xl flex flex-col justify-center items-center text-white'>
+						className='currentBalance h-1/2 text-4xl md:text-6xl flex flex-col justify-center items-center text-black'>
 						₹ {CurrentBalance.toLocaleString()}
 						<p className='text-base md:text-lg pb-4 md:pt-4 md:pb-0 text-center'>
 							Current Balance
@@ -101,8 +102,8 @@ const AddMoney = () => {
 						</p>
 					</motion.div>
 				</div>
-				<div className=' w-full md:w-1/2 px-0 py-3 md:px-16 h-full '>
-					<div className='border h-full lg:w-11/12  flex flex-col bg-white text-black rounded-md'>
+				<div className=' w-full md:w-1/2 px-0 py-3 md:px-16 h-full  '>
+					<div className=' bg-image border h-full lg:w-11/12  flex flex-col text-black rounded-md '>
 						<div className='upperPart h-1/2 flex flex-col justify-between items-center py-5'>
 							<div className='text-green text-lg lg:text-xl'>
 								How much would you like to add?
@@ -125,7 +126,7 @@ const AddMoney = () => {
 								className='MoneyOptions grid grid-cols-2 gap-3  sm:flex sm:justify-between sm:items-center sm:w-3/4 h-60 lg:h-1/2 flex-wrap px-10'>
 								<motion.div
 									variants={item}
-									className='py-1 px-3 cursor-pointer rounded-md my-auto text-center border-2 text-lg border-primary  text-primary'
+									className='py-1 px-3 cursor-pointer rounded-md my-auto text-center border-2 text-lg  border-green  text-primary hover:bg-green hover:text-white transition-all duration-400 ease-in-out'
 									onClick={(e) => {
 										setAmoutToAdd(100);
 									}}>
@@ -133,7 +134,7 @@ const AddMoney = () => {
 								</motion.div>
 								<motion.div
 									variants={item}
-									className='py-1 px-3 cursor-pointer rounded-md my-auto text-center border-2 text-lg border-primary  text-primary'
+									className='py-1 px-3 cursor-pointer rounded-md my-auto text-center border-2 text-lg  border-green  text-primary hover:bg-green hover:text-white transition-all duration-400 ease-in-out'
 									onClick={(e) => {
 										setAmoutToAdd(200);
 									}}>
@@ -141,7 +142,7 @@ const AddMoney = () => {
 								</motion.div>
 								<motion.div
 									variants={item}
-									className='py-1 px-3 cursor-pointer rounded-md my-auto text-center border-2 text-lg border-primary  text-primary'
+									className='py-1 px-3 cursor-pointer rounded-md my-auto text-center border-2 text-lg  border-green  text-primary hover:bg-green hover:text-white transition-all duration-400 ease-in-out'
 									onClick={(e) => {
 										setAmoutToAdd(400);
 									}}>
@@ -149,7 +150,7 @@ const AddMoney = () => {
 								</motion.div>
 								<motion.div
 									variants={item}
-									className='py-1 px-3 cursor-pointer rounded-md my-auto text-center border-2 text-lg border-primary  text-primary'
+									className='py-1 px-3 cursor-pointer rounded-md my-auto text-center border-2 text-lg  border-green  text-primary hover:bg-green hover:text-white transition-all duration-400 ease-in-out'
 									onClick={(e) => {
 										setAmoutToAdd(800);
 									}}>
@@ -157,7 +158,7 @@ const AddMoney = () => {
 								</motion.div>
 								<motion.div
 									variants={item}
-									className='py-1 px-2 cursor-pointer rounded-md my-auto text-center border-2 text-lg border-primary  text-primary'
+									className='py-1 px-2 cursor-pointer rounded-md my-auto text-center border-2 text-lg  border-green  text-primary hover:bg-green hover:text-white transition-all duration-400 ease-in-out'
 									onClick={(e) => {
 										setAmoutToAdd(1200);
 									}}>
@@ -165,7 +166,7 @@ const AddMoney = () => {
 								</motion.div>
 								<motion.div
 									variants={item}
-									className='py-1 px-2 cursor-pointer rounded-md my-auto text-center border-2 text-lg border-primary  text-primary'
+									className='py-1 px-2 cursor-pointer rounded-md my-auto text-center border-2 text-lg  border-green  text-primary hover:bg-green hover:text-white transition-all duration-400 ease-in-out'
 									onClick={(e) => {
 										setAmoutToAdd(1600);
 									}}>
@@ -173,7 +174,7 @@ const AddMoney = () => {
 								</motion.div>
 								<motion.div
 									variants={item}
-									className='py-1 px-2 cursor-pointer rounded-md my-auto text-center border-2 text-lg border-primary  text-primary'
+									className='py-1 px-2 cursor-pointer rounded-md my-auto text-center border-2 text-lg  border-green  text-primary hover:bg-green hover:text-white transition-all duration-400 ease-in-out'
 									onClick={(e) => {
 										setAmoutToAdd(2000);
 									}}>
@@ -181,7 +182,7 @@ const AddMoney = () => {
 								</motion.div>
 								<motion.div
 									variants={item}
-									className='py-1 px-2 cursor-pointer rounded-md my-auto text-center border-2 text-lg border-primary  text-primary'
+									className='py-1 px-2 cursor-pointer rounded-md my-auto text-center border-2 text-lg  border-green  text-primary hover:bg-green hover:text-white transition-all duration-400 ease-in-out'
 									onClick={(e) => {
 										setAmoutToAdd(2500);
 									}}>
@@ -195,7 +196,7 @@ const AddMoney = () => {
 							</div>
 							<motion.div
 								ref={ref}
-								className='lg:px-8 py-6 flex h-full w-3/4 justify-between '>
+								className='lg:px-8 py-6 flex h-full w-3/4 justify-between items-center '>
 								<motion.div
 									initial={{ scale: 0, rotate: 180 }}
 									animate={animation}
@@ -204,7 +205,7 @@ const AddMoney = () => {
 										stiffness: 260,
 										damping: 40,
 									}}
-									className=' h-28 lg:h-full w-20 lg:w-1/4 border-2  flex flex-col items-center justify-center py-2 px-3 '
+									className=' h-28 lg:h-11/12 w-20 lg:w-1/4 border-2 cursor-pointer  flex flex-col items-center justify-center  px-3 '
 									id='Salary'
 									onClick={(e) => {
 										handleIncomeSource(
@@ -225,7 +226,7 @@ const AddMoney = () => {
 										stiffness: 260,
 										damping: 40,
 									}}
-									className=' h-28 lg:h-full w-20 lg:w-1/4 border-2  flex flex-col items-center justify-center py-2 px-3 '
+									className=' h-28 lg:h-11/12 w-20 lg:w-1/4 border-2 cursor-pointer  flex flex-col items-center justify-center  px-3 '
 									id='Passive'
 									onClick={(e) => {
 										handleIncomeSource(
@@ -246,7 +247,7 @@ const AddMoney = () => {
 										stiffness: 260,
 										damping: 40,
 									}}
-									className=' h-28 lg:h-full w-20 lg:w-1/4 border-2  flex flex-col items-center justify-center py-2 px-3 '
+									className=' h-28 lg:h-11/12 w-20 lg:w-1/4 border-2 cursor-pointer  flex flex-col items-center justify-center  px-3 '
 									id='Other'
 									onClick={(e) => {
 										handleIncomeSource(
@@ -283,7 +284,7 @@ const AddMoney = () => {
 					<motion.div
 						initial={{ x: '100vw' }}
 						animate={{ x: 0 }}
-						exit={{ opacity: 0 ,transition:'all 0.5s ease-out' }}
+						exit={{ opacity: 0, transition: 'all 0.5s ease-out' }}
 						transition={{ duration: 1 }}
 						className='absolute right-3 bottom-6 w-3/4 sm:w-1/4 p-2 py-1 bg-green items-center text-indigo-100 leading-none rounded-md flex lg:inline-flex'
 						role='alert'>

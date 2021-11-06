@@ -1,74 +1,79 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Home.scss';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import bg from '../../images/bg.png';
 const Home = () => {
 	const [Balance, setBalance] = useState(34680);
 	const [SpentLastMonth, setSpentLastMonth] = useState(123443);
 	const [SpentLastYear, setSpentLastYear] = useState(12354443);
 	return (
-		<div className=' w-screen  md:h-auto cursor-default  relative'>
-			<motion.div
-				initial={{ width: 0 }}
-				animate={{ width: '91.666667%' }}
-				transition={{ duration: 0.5 }}
-				className='currentAmountBox mt-6 md:mt-16 rounded-md mx-auto w-11/12 border flex flex-col justify-between items-center font-semibold  bg-white py-3 border-gray-500  '>
-				<div className='BlankDiv'></div>
+		<div className='HomeContainer w-screen   cursor-default  relative pt-16 '>
+			{
 				<motion.div
-					initial={{ y: -30, opacity: 0 }}
-					animate={{ y: 0, opacity: 1 }}
-					transition={{ duration: 0.7, delay: 0.3 }}>
-					<div className='amount text-4xl    md:text-8xl  text-green px-5 md:px-16'>
-						₹ {Balance.toLocaleString()}
-					</div>
-					<motion.hr
-						initial={{ width: 0 }}
-						animate={{ width: '100%' }}
-						transition={{ duration: 0.5, delay: 0.7 }}
-						style={{ height: '1.5px', background: '#eeeeee' }}
-					/>
-					<p className='text-lg text-center  text-green pt-3'>Total Balance</p>
-				</motion.div>
-				<div className='flex justify-between w-full md:w-3/4'>
+					initial={{ width: 0 }}
+					animate={{ width: '91.666667%' }}
+					transition={{ duration: 0.5 }}
+					className='currentAmountBox  rounded-md mx-auto w-11/12 border flex flex-col justify-between items-center font-semibold  bg-white py-3 border-gray-500  '>
+					<div className='BlankDiv'></div>
 					<motion.div
-						initial={{ y: 30, opacity: 0 }}
+						initial={{ y: -30, opacity: 0 }}
 						animate={{ y: 0, opacity: 1 }}
-						transition={{ duration: 0.7, delay: 1.3 }}
-						className='lastMonth text-primary text-md md:text-xl text-center p-4'>
-						<p className='  px-1 md:px-8'>Total Spent Last Month</p>
+						transition={{ duration: 0.7, delay: 0.3 }}>
+						<div className='amount text-4xl    md:text-8xl  text-green px-5 md:px-16'>
+							₹ {Balance.toLocaleString()}
+						</div>
 						<motion.hr
-							className='mb-2'
 							initial={{ width: 0 }}
 							animate={{ width: '100%' }}
-							transition={{ duration: 0.3, delay: 2 }}
-							style={{
-								height: '1.5px',
-								background: '#eeeeee',
-							}}
+							transition={{ duration: 0.5, delay: 0.7 }}
+							style={{ height: '1.5px', background: '#eeeeee' }}
 						/>
-						₹{SpentLastMonth.toLocaleString()}
+						<p className='text-lg text-center  text-green pt-3'>
+							Total Balance
+						</p>
 					</motion.div>
+					<div className='flex justify-between w-full md:w-3/4'>
+						<motion.div
+							initial={{ y: 30, opacity: 0 }}
+							animate={{ y: 0, opacity: 1 }}
+							transition={{ duration: 0.7, delay: 1.3 }}
+							className='lastMonth text-primary text-md md:text-xl text-center p-4'>
+							<p className='  px-1 md:px-8'>Total Spent Last Month</p>
+							<motion.hr
+								className='mb-2'
+								initial={{ width: 0 }}
+								animate={{ width: '100%' }}
+								transition={{ duration: 0.3, delay: 2 }}
+								style={{
+									height: '1.5px',
+									background: '#eeeeee',
+								}}
+							/>
+							₹{SpentLastMonth.toLocaleString()}
+						</motion.div>
 
-					<motion.div
-						initial={{ y: 30, opacity: 0 }}
-						animate={{ y: 0, opacity: 1 }}
-						transition={{ duration: 0.7, delay: 1.3 }}
-						className='totalThisYear text-md md:text-xl text-center p-4 '>
-						<p className=' px-1 md:px-8'>Total Spent This Year</p>
-						<motion.hr
-							className='mb-2'
-							initial={{ width: 0 }}
-							animate={{ width: '100%' }}
-							transition={{ duration: 0.3, delay: 2 }}
-							style={{
-								height: '1.5px',
-								background: '#eeeeee',
-							}}
-						/>
-						₹{SpentLastYear.toLocaleString()}
-					</motion.div>
-				</div>
-			</motion.div>
+						<motion.div
+							initial={{ y: 30, opacity: 0 }}
+							animate={{ y: 0, opacity: 1 }}
+							transition={{ duration: 0.7, delay: 1.3 }}
+							className='totalThisYear text-md md:text-xl text-center p-4 '>
+							<p className=' px-1 md:px-8'>Total Spent This Year</p>
+							<motion.hr
+								className='mb-2'
+								initial={{ width: 0 }}
+								animate={{ width: '100%' }}
+								transition={{ duration: 0.3, delay: 2 }}
+								style={{
+									height: '1.5px',
+									background: '#eeeeee',
+								}}
+							/>
+							₹{SpentLastYear.toLocaleString()}
+						</motion.div>
+					</div>
+				</motion.div>
+			}
 
 			<div className='buttons flex flex-col px-12 lg:px-0 lg:flex-row justify-between items-center w-11/12 mx-auto mt-4 text-white h-full md:h-52  '>
 				{/* <button className='rounded text-lg btn-border-1 px-36 py-0 xl:py-4 mt-4 xl:mt-0   transition duration-200 ease-in bg-green'>

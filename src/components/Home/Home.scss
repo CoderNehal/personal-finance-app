@@ -1,3 +1,15 @@
+.HomeContainer {
+	height: auto;
+	min-height: 88.5vh;
+	background: url('../../images/bg.png') no-repeat ;
+	background-size: cover;
+	
+	object-fit: contain;
+	@media (min-width:480px) {
+	min-height: 88.7vh;
+		
+	}
+}
 .currentAmountBox {
 	height: 20rem;
 	box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 12px;

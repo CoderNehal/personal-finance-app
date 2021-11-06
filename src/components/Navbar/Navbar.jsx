@@ -5,7 +5,7 @@ import './Navbar.scss';
 const Navbar = () => {
 	const [isLogged, setisLogged] = useState(localStorage.getItem('isLogged'));
 	return (
-		<nav className='nav flex flex-wrap items-center justify-between px-16 py-4 border-b-2 border-gray-400  shadow-md'>
+		<nav className='nav bg-secondary flex flex-wrap items-center justify-between px-6 md:px-16 py-4 border-b-2 border-gray-400  shadow-md'>
 			<div className='flex flex-no-shrink items-center mr-6 py-3 text-grey-darkest'>
 				<svg
 					xmlns='http://www.w3.org/2000/svg'
@@ -25,7 +25,7 @@ const Navbar = () => {
 			<input className='menu-btn hidden ' type='checkbox' id='menu-btn' />
 			<label
 				className='menu-icon block cursor-pointer md:hidden px-2 py-4 relative select-none'
-				for='menu-btn'>
+				htmlFor='menu-btn'>
 				<span className='navicon bg-grey-darkest flex items-center relative'></span>
 			</label>
 

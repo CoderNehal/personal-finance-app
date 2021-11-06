@@ -1,9 +1,23 @@
 .AddMoneyContainer {
+	background: url('../../../images/addMoneyBg.jpg');
+
+
+	background-position: center;
+	background-repeat: no-repeat;
 	height: auto;
-	min-height: 40rem;
+	min-height: 88.7vh;
+
 	@media (min-width: 998px) {
 		height: 40rem;
 	}
+}
+.bg-image {
+	background: rgba(255, 255, 255, 0.25);
+	box-shadow: 0 8px 12px 0 #1504857c;
+	backdrop-filter: blur(4px);
+	-webkit-backdrop-filter: blur(4px);
+	border-radius: 10px;
+	border: 1px solid rgba(255, 255, 255, 0.18);
 }
 /* Chrome, Safari, Edge, Opera */
 /* Firefox */
@@ -20,5 +34,4 @@ input {
 input[type='number'] {
 	-moz-appearance: textfield;
 	outline: none;
-	
 }

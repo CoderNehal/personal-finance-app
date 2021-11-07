@@ -29,11 +29,13 @@ const item = {
 const SpendMoney = () => {
 	const [CurrentBalance, setCurrentBalance] = useState(34680); //Fetch here
 	const [UpdatedBalance, setUpdatedBalance] = useState(34680);
-	const [AmoutToAdd, setAmoutToAdd] = useState(0);
+	const [AmoutToAdd, setAmoutToAdd] = useState();
 	const [ModeOFIncome, setModeOFIncome] = useState(null);
 	const [ShowAlert, setShowAlert] = useState(false);
-	const [other, setother] = useState(true);
+	const [other, setother] = useState(false);
 	const [otherSelectedOption, setotherSelectedOption] = useState(null);
+	const [showDropDown, setshowDropDown] = useState(false);
+	const [otherReason, setotherReason] = useState('');
 	const history = useHistory();
 	const { ref, inView } = useInView({
 		threshold: 1,
@@ -46,7 +48,8 @@ const SpendMoney = () => {
 	}, [inView]);
 	const handleIncomeSource = (classList, id) => {
 		if (id == 'Other') {
-			return setother(true);
+			setModeOFIncome(id);
+			setother(true);
 		} else {
 			document.getElementById('Salary').classList.remove('border-red');
 			document.getElementById('Passive').classList.remove('border-red');
@@ -59,29 +62,46 @@ const SpendMoney = () => {
 	};
 	const formatValue = (value) => `₹ ${Number(value).toLocaleString()}`;
 	const HandleSpendMoney = () => {
-		if (AmoutToAdd === 0) {
-			alert('Please Enter a Valid Amount');
-		} else if (ModeOFIncome === null) {
-			alert('Please select Mode of Income');
+		if (!other) {
+			if (AmoutToAdd === 0) {
+				alert('Please Enter a Valid Amount');
+			} else if (ModeOFIncome === null) {
+				alert('Please select Mode of Income');
+			} else {
+				const updatedAmmount = CurrentBalance - AmoutToAdd;
+				setUpdatedBalance(updatedAmmount); // async
+				console.log(
+					'Balance:',
+					CurrentBalance,
+					'Update:',
+					UpdatedBalance,
+					'Total amount Added:',
+					AmoutToAdd,
+					'Mode of payment:',
+					ModeOFIncome
+				);
+				setShowAlert(true);
+			}
 		} else {
-			const updatedAmmount = CurrentBalance - AmoutToAdd;
-			setUpdatedBalance(updatedAmmount); // async
-			console.log(
-				'Balance:',
-				CurrentBalance,
-				'Update:',
-				UpdatedBalance,
-				'Total amount Added:',
-				AmoutToAdd,
-				'Mode of payment:',
-				ModeOFIncome
-			);
-			setShowAlert(true);
+			if (AmoutToAdd) {
+				console.log(
+					'Mode :',
+					ModeOFIncome,
+					'Reason :',
+					otherSelectedOption,
+					'Total fookin amount spoend :',
+					AmoutToAdd
+				);
+			} else if (!otherSelectedOption) {
+				alert('Select fookin Category');
+			} else {
+				alert('Add fookin amount');
+			}
 		}
 	};
 	return (
 		<div className='SpendMoneyContainer p-8  relative'>
-			<div className='absolute cursor-pointer w-12 h-12 '>
+			<div className='absolute  cursor-pointer w-12 h-12 '>
 				<button
 					className=' absolute text-black  '
 					onClick={() => history.goBack()}>
@@ -136,81 +156,133 @@ const SpendMoney = () => {
 								How much would you like to spend?
 							</div>
 							{other ? (
-								<div className=' py-12  flex justify-around'>
-									<motion.div
-										initial={{ opacity: 0 }}
-										animate={{ opacity: 1 }}
-										transition={{
-											duration: 1,
-										}}
-										className=' h-28 lg:h-11/12 w-20 lg:w-1/4 border-2 cursor-pointer flex flex-col items-center justify-center  px-8 border-black '
-										id='Other'
-										onClick={(e) => {
-											handleIncomeSource(
-												e.currentTarget.classList,
-												e.currentTarget.id
-											);
-										}}>
-										<img src={Food} alt='' />
-										<p className='text-sm text-red font-semibold uppercase pt-0  md:pt-3'>
-											Other
-										</p>
-									</motion.div>
+								<>
+									<div className=' py-12 px-6 w-full grid grid-cols-3 gap-8'>
+										<motion.div
+											initial={{ opacity: 0 }}
+											animate={{ opacity: 1 }}
+											transition={{
+												duration: 1,
+											}}
+											className=' h-28 lg:h-11/12 mx-auto md:mx-6 md:pt-3  cursor-pointer flex flex-col items-center justify-center   border-black '
+											id='Other'
+											onClick={(e) => {
+												handleIncomeSource(
+													e.currentTarget.classList,
+													e.currentTarget.id
+												);
+											}}>
+											<img src={Food} className='h-full w-full' alt='' />
+											<p className='text-sm text-red font-semibold uppercase pt-0  md:pt-3'>
+												Other
+											</p>
+										</motion.div>
 
-									<div className='dropdown inline-block relative w-1/4'>
-										<button className='bg-gray-300 text-gray-500 font-semibold py-2 px-4 rounded inline-flex items-center'>
-											<span className='mr-1'>
-												{otherSelectedOption
-													? otherSelectedOption
-													: 'Type of expense'}
-											</span>
-											<svg
-												className='fill-current h-4 w-4'
-												xmlns='http://www.w3.org/2000/svg'
-												viewBox='0 0 20 20'>
-												<path d='M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z' />{' '}
-											</svg>
-										</button>
-										<ul className='dropdown-menu absolute hidden text-gray-500 pt-1'>
-											<li className=''>
-												<p
-													onClick={(e) =>
-														setotherSelectedOption(e.currentTarget.innerText)
+										<div className='dropdown  relative col-span-2 flex flex-col justify-between items-center '>
+											<motion.button
+												initial={{ opacity: 0, y: -20 }}
+												animate={{ opacity: 1, y: 0 }}
+												transition={{ duration: 0.7 }}
+												className='bg-gray-300 text-gray-500 text-sm font-semibold py-1 px-4 rounded inline-flex items-center'
+												onClick={() => setshowDropDown(!showDropDown)}>
+												<span className='mr-1 text-sm sm:text-base'>
+													{otherSelectedOption
+														? otherSelectedOption
+														: 'Type of expense'}
+												</span>
+												<svg
+													className='fill-current h-4 w-4'
+													xmlns='http://www.w3.org/2000/svg'
+													viewBox='0 0 20 20'>
+													<path d='M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z' />{' '}
+												</svg>
+											</motion.button>
+											{showDropDown ? (
+												<ul className='dropdown-menu absolute hidden text-gray-500 pt-7 px-4 '>
+													<li
+														className='border border-gray-300 rounded-none text-sm sm:text-base '
+														onClick={() => setshowDropDown(!showDropDown)}>
+														<p
+															onClick={(e) =>
+																setotherSelectedOption(
+																	e.currentTarget.innerText
+																)
+															}
+															className='rounded bg-white text-black hover:bg-gray-200 py-2 px-4 block whitespace-no-wrap cursor-pointer '>
+															Food
+														</p>
+													</li>
+													<li
+														className='border border-gray-300 rounded-none text-sm sm:text-base border-t-0 '
+														onClick={() => setshowDropDown(!showDropDown)}>
+														<p
+															onClick={(e) =>
+																setotherSelectedOption(
+																	e.currentTarget.innerText
+																)
+															}
+															className='rounded bg-white hover:border hover:border-red hover:border-l-2 text-black hover:bg-gray-200 py-2 px-4 block whitespace-no-wrap cursor-pointer'>
+															Utilities
+														</p>
+													</li>
+													<li
+														className='border border-gray-300 rounded-none text-sm sm:text-base border-t-0 '
+														onClick={() => setshowDropDown(!showDropDown)}>
+														<p
+															onClick={(e) =>
+																setotherSelectedOption(
+																	e.currentTarget.innerText
+																)
+															}
+															className='rounded bg-white hover:border hover:border-red hover:border-l-2 text-black hover:bg-gray-200 py-2 px-4 block whitespace-no-wrap cursor-pointer'>
+															Medical
+														</p>
+													</li>
+													<li
+														className='border border-gray-300 rounded-none text-sm sm:text-base border-t-0 '
+														onClick={() => setshowDropDown(!showDropDown)}>
+														<p
+															onClick={(e) =>
+																setotherSelectedOption(
+																	e.currentTarget.innerText
+																)
+															}
+															className='rounded bg-white hover:border hover:border-red hover:border-l-2 text-black hover:bg-gray-200 py-2 px-4 block whitespace-no-wrap cursor-pointer'>
+															Entertainment
+														</p>
+													</li>
+												</ul>
+											) : null}
+											<motion.div
+												initial={{ opacity: 0, y: 20 }}
+												animate={{ opacity: 1, y: 0 }}
+												transition={{ duration: 0.7 }}
+												className='flex justify-center items-center text-red text-xl -ml-4'>
+												₹
+												<input
+													className={`bg-transparent border-b-2 w-2/3 text-center ml-4 ${
+														AmoutToAdd > 0 ? 'border-red' : null
+													}`}
+													type='number'
+													value={AmoutToAdd}
+													onChange={(e) =>
+														setAmoutToAdd(Number(e.target.value))
 													}
-													className='rounded bg-white text-black hover:bg-gray-200 py-2 px-4 block whitespace-no-wrap cursor-pointer '>
-													Food
-												</p>
-											</li>
-											<li className=''>
-												<p
-													onClick={(e) =>
-														setotherSelectedOption(e.currentTarget.innerText)
-													}
-													className='rounded bg-white hover:border hover:border-red hover:border-l-2 text-black hover:bg-gray-200 py-2 px-4 block whitespace-no-wrap cursor-pointer'>
-													Utilities
-												</p>
-											</li>
-											<li className=''>
-												<p
-													onClick={(e) =>
-														setotherSelectedOption(e.currentTarget.innerText)
-													}
-													className='rounded bg-white hover:border hover:border-red hover:border-l-2 text-black hover:bg-gray-200 py-2 px-4 block whitespace-no-wrap cursor-pointer'>
-													Medical 
-												</p>
-											</li>
-											<li className=''>
-												<p
-													onClick={(e) =>
-														setotherSelectedOption(e.currentTarget.innerText)
-													}
-													className='rounded bg-white hover:border hover:border-red hover:border-l-2 text-black hover:bg-gray-200 py-2 px-4 block whitespace-no-wrap cursor-pointer'>
-													 Entertainment
-												</p>
-											</li>
-										</ul>
+												/>
+											</motion.div>
+										</div>
 									</div>
-								</div>
+									<motion.input
+										initial={{ x: '50vw' }}
+										animate={{ x: 0 }}
+										transition={{ duration: 1 }}
+										className='mx-auto  py-2 w-10/12 border bg-transparent focus:outline-none focus:border-black px-4 text-primary'
+										type='text'
+										placeholder='Enter description (optional)*'
+										value={otherReason}
+										onChange={(e) => setotherReason(e.target.value)}
+									/>
+								</>
 							) : (
 								<>
 									<div className='-ml-4 py-6 lg:py-0'>

@@ -29,7 +29,7 @@ const item = {
 const AddMoney = () => {
 	const [CurrentBalance, setCurrentBalance] = useState(34680); //Fetch here
 	const [UpdatedBalance, setUpdatedBalance] = useState(34680);
-	const [AmoutToAdd, setAmoutToAdd] = useState(0);
+	const [AmoutToAdd, setAmoutToAdd] = useState();
 	const [ModeOFIncome, setModeOFIncome] = useState(null);
 	const [ShowAlert, setShowAlert] = useState(false);
 	const [unMount, setunMount] = useState(false);
@@ -142,7 +142,9 @@ const AddMoney = () => {
 								<div className='flex justify-center items-center text-primary text-xl'>
 									₹
 									<input
-										className='bg-transparent border-b-2 w-1/3 text-center ml-4 '
+										className={`bg-transparent border-b-2 w-1/3 text-center ml-4 ${
+											AmoutToAdd > 0 ? 'border-green' : null
+										}`}
 										type='number'
 										value={AmoutToAdd}
 										onChange={(e) => setAmoutToAdd(Number(e.target.value))}

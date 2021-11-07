@@ -53,7 +53,7 @@ const SpendMoney = () => {
 		} else {
 			document.getElementById('Salary').classList.remove('border-red');
 			document.getElementById('Passive').classList.remove('border-red');
-			document.getElementById('Food').classList.remove('border-red');
+			document.getElementById('Other').classList.remove('border-red');
 			classList.add('border-red');
 			console.log(id);
 
@@ -63,7 +63,7 @@ const SpendMoney = () => {
 	const formatValue = (value) => `₹ ${Number(value).toLocaleString()}`;
 	const HandleSpendMoney = () => {
 		if (!other) {
-			if (AmoutToAdd === 0) {
+			if (AmoutToAdd == null) {
 				alert('Please Enter a Valid Amount');
 			} else if (ModeOFIncome === null) {
 				alert('Please select Mode of Income');
@@ -92,6 +92,7 @@ const SpendMoney = () => {
 					'Total fookin amount spoend :',
 					AmoutToAdd
 				);
+				setShowAlert(true);
 			} else if (!otherSelectedOption) {
 				alert('Select fookin Category');
 			} else {
@@ -157,7 +158,7 @@ const SpendMoney = () => {
 							</div>
 							{other ? (
 								<>
-									<div className=' py-12 px-6 w-full grid grid-cols-3 gap-8'>
+									<div className=' py-12 px-5 md:px-6 w-full grid grid-cols-3 gap-8'>
 										<motion.div
 											initial={{ opacity: 0 }}
 											animate={{ opacity: 1 }}
@@ -198,9 +199,9 @@ const SpendMoney = () => {
 												</svg>
 											</motion.button>
 											{showDropDown ? (
-												<ul className='dropdown-menu absolute hidden text-gray-500 pt-7 px-4 '>
+												<ul className='dropdown-menu absolute hidden text-gray-500 pt-7 px-4 z-10 '>
 													<li
-														className='border border-gray-300 rounded-none text-sm sm:text-base '
+														className='border border-gray-300 w-36 rounded-none text-sm sm:text-base '
 														onClick={() => setshowDropDown(!showDropDown)}>
 														<p
 															onClick={(e) =>
@@ -213,7 +214,7 @@ const SpendMoney = () => {
 														</p>
 													</li>
 													<li
-														className='border border-gray-300 rounded-none text-sm sm:text-base border-t-0 '
+														className='border border-gray-300 w-36 rounded-none text-sm sm:text-base border-t-0 '
 														onClick={() => setshowDropDown(!showDropDown)}>
 														<p
 															onClick={(e) =>
@@ -226,7 +227,7 @@ const SpendMoney = () => {
 														</p>
 													</li>
 													<li
-														className='border border-gray-300 rounded-none text-sm sm:text-base border-t-0 '
+														className='border border-gray-300 w-36 rounded-none text-sm sm:text-base border-t-0 '
 														onClick={() => setshowDropDown(!showDropDown)}>
 														<p
 															onClick={(e) =>
@@ -239,7 +240,7 @@ const SpendMoney = () => {
 														</p>
 													</li>
 													<li
-														className='border border-gray-300 rounded-none text-sm sm:text-base border-t-0 '
+														className='border border-gray-300 w-36 rounded-none text-sm sm:text-base border-t-0 '
 														onClick={() => setshowDropDown(!showDropDown)}>
 														<p
 															onClick={(e) =>

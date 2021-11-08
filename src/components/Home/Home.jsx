@@ -2,11 +2,40 @@ import React, { useEffect, useState } from 'react';
 import './Home.scss';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import axios from 'axios';
+import cookie from 'js-cookie';
 
 const Home = () => {
 	const [Balance, setBalance] = useState(34680);
 	const [SpentLastMonth, setSpentLastMonth] = useState(123443);
 	const [SpentLastYear, setSpentLastYear] = useState(12354443);
+	useEffect(() => {
+		cookie.set('userId', '0c681a1e-c0aa-4d73-9480-8e40f81be433', {
+			expires: 1,
+		});
+		axios
+			.post(
+				'http://localhost:5000/get-user',
+				{
+					userId: cookie.get('userId'),
+				},
+				{
+					headers: {
+						'content-type': 'application/json',
+					},
+				}
+			)
+			.then((res) => {
+				console.log(res);
+				const { Balance, LastMonthSpent, LastYearSpent } = res.data.userInfo;
+				setBalance(Balance);
+				setSpentLastMonth(LastMonthSpent);
+				setSpentLastYear(LastYearSpent);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	}, []);
 	return (
 		<div className='HomeContainer w-screen   cursor-default  relative pt-16 '>
 			{
@@ -90,7 +119,6 @@ const Home = () => {
 					animate={{ x: 0 }}
 					transition={{
 						duration: 0.7,
-						
 					}}>
 					<Link
 						className='btn btn-border-1 w-3/4 sm:w-auto mx-auto  border-none outline-none px-36 py-0 xl:py-4 mt-4 xl:mt-0 rounded border-gray-300 text-sm md:text-lg text-center relative flex justify-center items-center text-white bg-green  '
@@ -116,7 +144,6 @@ const Home = () => {
 					animate={{ x: 0 }}
 					transition={{
 						duration: 1,
-						
 					}}>
 					<Link
 						className='btn btn-border-1 w-3/4 sm:w-auto mx-auto  px-36 py-0 xl:py-4 mt-4 xl:mt-0 rounded border-gray-300 text-sm md:text-lg text-center relative flex justify-center items-center text-white bg-red'
@@ -143,7 +170,6 @@ const Home = () => {
 					animate={{ x: 0 }}
 					transition={{
 						duration: 1.3,
-						
 					}}>
 					<Link
 						className='btn btn-border-1 w-3/4 sm:w-auto mx-auto  px-36 py-0 xl:py-4 mt-4 xl:mt-0 rounded border-gray-300 text-sm md:text-lg text-center relative flex justify-center items-center text-white bg-yellow-300'

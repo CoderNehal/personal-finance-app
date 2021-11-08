@@ -7,6 +7,9 @@ import { useInView } from 'react-intersection-observer';
 import { motion, useAnimation, AnimatePresence } from 'framer-motion';
 import AnimatedNumber from 'animated-number-react';
 import { useHistory } from 'react-router';
+import axios from 'axios';
+import cookie from 'js-cookie';
+
 const container = {
 	hidden: { opacity: 1, scale: 0 },
 	visible: {
@@ -29,70 +32,121 @@ const item = {
 const SpendMoney = () => {
 	const [CurrentBalance, setCurrentBalance] = useState(34680); //Fetch here
 	const [UpdatedBalance, setUpdatedBalance] = useState(34680);
-	const [AmoutToAdd, setAmoutToAdd] = useState();
-	const [ModeOFIncome, setModeOFIncome] = useState(null);
+	const [AmoutToSpend, setAmoutToSpend] = useState();
+	const [ReasonToSpend, setReasonToSpend] = useState(null);
 	const [ShowAlert, setShowAlert] = useState(false);
 	const [other, setother] = useState(false);
 	const [otherSelectedOption, setotherSelectedOption] = useState(null);
 	const [showDropDown, setshowDropDown] = useState(false);
 	const [otherReason, setotherReason] = useState('');
+	const [userId, setUserId] = useState(cookie.get('userId'));
+
 	const history = useHistory();
 	const { ref, inView } = useInView({
 		threshold: 1,
 	});
 	const animation = useAnimation();
 	useEffect(() => {
+		axios
+			.post(
+				'http://localhost:5000/get-user',
+				{
+					userId: userId,
+				},
+				{
+					headers: {
+						'content-type': 'application/json',
+					},
+				}
+			)
+			.then((res) => {
+				console.log(res);
+				const { Balance } = res.data.userInfo;
+				setCurrentBalance(Balance);
+				setUpdatedBalance(Balance);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
 		if (inView) {
 			animation.start({ rotate: 0, scale: 1 });
 		}
 	}, [inView]);
 	const handleIncomeSource = (classList, id) => {
+		console.log('This is true');
 		if (id == 'Other') {
-			setModeOFIncome(id);
+			console.log('This is In Incomr');
+
+			setReasonToSpend('Other');
 			setother(true);
 		} else {
-			document.getElementById('Salary').classList.remove('border-red');
-			document.getElementById('Passive').classList.remove('border-red');
+			document.getElementById('Housing').classList.remove('border-red');
+			document.getElementById('Transport').classList.remove('border-red');
 			document.getElementById('Other').classList.remove('border-red');
 			classList.add('border-red');
 			console.log(id);
 
-			setModeOFIncome(id);
+			setReasonToSpend(id);
 		}
 	};
 	const formatValue = (value) => `₹ ${Number(value).toLocaleString()}`;
-	const HandleSpendMoney = () => {
+	const UpdateData = (money, reason, OtherReason) => {
+		axios
+			.post(
+				'http://localhost:5000/spend-money',
+				{
+					money: money,
+					resaon: reason,
+					userId: userId,
+					OtherReason: OtherReason,
+				},
+				{
+					headers: {
+						'content-type': 'application/json',
+					},
+				}
+			)
+			.then((res) => {
+				console.log(res.data);
+				setShowAlert(true);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	};
+	const HandleSpendMoney = async () => {
+		const updatedAmmount = CurrentBalance - AmoutToSpend;
 		if (!other) {
-			if (AmoutToAdd == null) {
+			if (AmoutToSpend == null) {
 				alert('Please Enter a Valid Amount');
-			} else if (ModeOFIncome === null) {
+			} else if (ReasonToSpend === null) {
 				alert('Please select Mode of Income');
 			} else {
-				const updatedAmmount = CurrentBalance - AmoutToAdd;
 				setUpdatedBalance(updatedAmmount); // async
+				UpdateData(AmoutToSpend, ReasonToSpend, otherReason);
 				console.log(
 					'Balance:',
 					CurrentBalance,
 					'Update:',
 					UpdatedBalance,
 					'Total amount Added:',
-					AmoutToAdd,
+					AmoutToSpend,
 					'Mode of payment:',
-					ModeOFIncome
+					ReasonToSpend
 				);
-				setShowAlert(true);
 			}
 		} else {
-			if (AmoutToAdd) {
+			if (AmoutToSpend) {
+				UpdateData(AmoutToSpend, otherSelectedOption, otherReason);
+				setUpdatedBalance(updatedAmmount);
 				console.log(
 					'Mode :',
-					ModeOFIncome,
+					ReasonToSpend,
 					'Reason :',
 					otherSelectedOption,
 					'Total fookin amount spoend :',
-					AmoutToAdd
+					AmoutToSpend
 				);
-				setShowAlert(true);
 			} else if (!otherSelectedOption) {
 				alert('Select fookin Category');
 			} else {
@@ -262,12 +316,12 @@ const SpendMoney = () => {
 												₹
 												<input
 													className={`bg-transparent border-b-2 w-2/3 text-center ml-4 ${
-														AmoutToAdd > 0 ? 'border-red' : null
+														AmoutToSpend > 0 ? 'border-red' : null
 													}`}
 													type='number'
-													value={AmoutToAdd}
+													value={AmoutToSpend}
 													onChange={(e) =>
-														setAmoutToAdd(Number(e.target.value))
+														setAmoutToSpend(Number(e.target.value))
 													}
 												/>
 											</motion.div>
@@ -292,8 +346,10 @@ const SpendMoney = () => {
 											<input
 												className='bg-transparent border-b-2 w-1/3 text-center ml-4 '
 												type='number'
-												value={AmoutToAdd}
-												onChange={(e) => setAmoutToAdd(Number(e.target.value))}
+												value={AmoutToSpend}
+												onChange={(e) =>
+													setAmoutToSpend(Number(e.target.value))
+												}
 											/>
 										</div>
 									</div>
@@ -306,7 +362,7 @@ const SpendMoney = () => {
 											variants={item}
 											className='py-1 px-3 cursor-pointer rounded-md my-auto text-center border-2 text-lg border-red  text-primary hover:bg-red hover:text-white transition-all duration-400 ease-in-out'
 											onClick={(e) => {
-												setAmoutToAdd(100);
+												setAmoutToSpend(100);
 											}}>
 											₹ 100
 										</motion.div>
@@ -314,7 +370,7 @@ const SpendMoney = () => {
 											variants={item}
 											className='py-1 px-3 cursor-pointer rounded-md my-auto text-center border-2 text-lg border-red  text-primary hover:bg-red hover:text-white transition-all duration-400 ease-in-out'
 											onClick={(e) => {
-												setAmoutToAdd(200);
+												setAmoutToSpend(200);
 											}}>
 											₹ 200
 										</motion.div>
@@ -322,7 +378,7 @@ const SpendMoney = () => {
 											variants={item}
 											className='py-1 px-3 cursor-pointer rounded-md my-auto text-center border-2 text-lg border-red  text-primary hover:bg-red hover:text-white transition-all duration-400 ease-in-out'
 											onClick={(e) => {
-												setAmoutToAdd(400);
+												setAmoutToSpend(400);
 											}}>
 											₹ 400
 										</motion.div>
@@ -330,7 +386,7 @@ const SpendMoney = () => {
 											variants={item}
 											className='py-1 px-3 cursor-pointer rounded-md my-auto text-center border-2 text-lg border-red  text-primary hover:bg-red hover:text-white transition-all duration-400 ease-in-out'
 											onClick={(e) => {
-												setAmoutToAdd(800);
+												setAmoutToSpend(800);
 											}}>
 											₹ 800
 										</motion.div>
@@ -338,7 +394,7 @@ const SpendMoney = () => {
 											variants={item}
 											className='py-1 px-2 cursor-pointer rounded-md my-auto text-center border-2 text-lg border-red  text-primary hover:bg-red hover:text-white transition-all duration-400 ease-in-out'
 											onClick={(e) => {
-												setAmoutToAdd(1200);
+												setAmoutToSpend(1200);
 											}}>
 											₹ 1200
 										</motion.div>
@@ -346,7 +402,7 @@ const SpendMoney = () => {
 											variants={item}
 											className='py-1 px-2 cursor-pointer rounded-md my-auto text-center border-2 text-lg border-red  text-primary hover:bg-red hover:text-white transition-all duration-400 ease-in-out'
 											onClick={(e) => {
-												setAmoutToAdd(1600);
+												setAmoutToSpend(1600);
 											}}>
 											₹ 1600
 										</motion.div>
@@ -354,7 +410,7 @@ const SpendMoney = () => {
 											variants={item}
 											className='py-1 px-2 cursor-pointer rounded-md my-auto text-center border-2 text-lg border-red  text-primary hover:bg-red hover:text-white transition-all duration-400 ease-in-out'
 											onClick={(e) => {
-												setAmoutToAdd(2000);
+												setAmoutToSpend(2000);
 											}}>
 											₹ 2000
 										</motion.div>
@@ -362,7 +418,7 @@ const SpendMoney = () => {
 											variants={item}
 											className='py-1 px-2 cursor-pointer rounded-md my-auto text-center border-2 text-lg border-red  text-primary hover:bg-red hover:text-white transition-all duration-400 ease-in-out'
 											onClick={(e) => {
-												setAmoutToAdd(2500);
+												setAmoutToSpend(2500);
 											}}>
 											₹ 2500
 										</motion.div>
@@ -392,7 +448,7 @@ const SpendMoney = () => {
 												damping: 40,
 											}}
 											className=' h-28 lg:h-11/12 w-20 lg:w-1/4 border-2 cursor-pointer flex flex-col items-center justify-center  px-3 '
-											id='Salary'
+											id='Housing'
 											onClick={(e) => {
 												handleIncomeSource(
 													e.currentTarget.classList,
@@ -413,7 +469,7 @@ const SpendMoney = () => {
 												damping: 40,
 											}}
 											className=' h-28 lg:h-11/12 w-20 lg:w-1/4 border-2 cursor-pointer flex flex-col items-center justify-center  px-3 '
-											id='Passive'
+											id='Transport'
 											onClick={(e) => {
 												handleIncomeSource(
 													e.currentTarget.classList,

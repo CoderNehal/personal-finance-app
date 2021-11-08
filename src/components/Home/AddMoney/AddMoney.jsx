@@ -7,6 +7,8 @@ import { useInView } from 'react-intersection-observer';
 import { motion, useAnimation, AnimatePresence } from 'framer-motion';
 import AnimatedNumber from 'animated-number-react';
 import { useHistory } from 'react-router-dom';
+import axios from 'axios';
+import cookie from 'js-cookie';
 const container = {
 	hidden: { opacity: 1, scale: 0 },
 	visible: {
@@ -27,18 +29,40 @@ const item = {
 	},
 };
 const AddMoney = () => {
-	const [CurrentBalance, setCurrentBalance] = useState(34680); //Fetch here
-	const [UpdatedBalance, setUpdatedBalance] = useState(34680);
+	const [CurrentBalance, setCurrentBalance] = useState(0); //Fetch here
+	const [UpdatedBalance, setUpdatedBalance] = useState(0);
 	const [AmoutToAdd, setAmoutToAdd] = useState();
 	const [ModeOFIncome, setModeOFIncome] = useState(null);
 	const [ShowAlert, setShowAlert] = useState(false);
 	const [unMount, setunMount] = useState(false);
+	const [userId, setUserId] = useState(cookie.get('userId'));
 	const history = useHistory();
 	const { ref, inView } = useInView({
 		threshold: 1,
 	});
 	const animation = useAnimation();
 	useEffect(() => {
+		axios
+			.post(
+				'http://localhost:5000/get-user',
+				{
+					userId: userId,
+				},
+				{
+					headers: {
+						'content-type': 'application/json',
+					},
+				}
+			)
+			.then((res) => {
+				console.log(res);
+				const { Balance } = res.data.userInfo;
+				setCurrentBalance(Balance);
+				setUpdatedBalance(Balance);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
 		if (inView) {
 			animation.start({ rotate: 0, scale: 1 });
 		}
@@ -52,7 +76,7 @@ const AddMoney = () => {
 		setModeOFIncome(id);
 	};
 	const formatValue = (value) => `₹ ${Number(value).toLocaleString()}`;
-	const HandleAddMoney = () => {
+	const HandleAddMoney = async () => {
 		if (AmoutToAdd === 0) {
 			alert('Please Enter a Valid Amount');
 		} else if (ModeOFIncome === null) {
@@ -60,6 +84,27 @@ const AddMoney = () => {
 		} else {
 			const updatedAmmount = CurrentBalance + AmoutToAdd;
 			setUpdatedBalance(updatedAmmount); // async
+			axios
+				.post(
+					'http://localhost:5000/add-money',
+					{
+						money: AmoutToAdd,
+						resaon: ModeOFIncome,
+						userId: userId,
+					},
+					{
+						headers: {
+							'content-type': 'application/json',
+						},
+					}
+				)
+				.then((res) => {
+					console.log(res.data);
+					setShowAlert(true);
+				})
+				.catch((err) => {
+					console.log(err);
+				});
 			console.log(
 				'Balance:',
 				CurrentBalance,
@@ -70,7 +115,6 @@ const AddMoney = () => {
 				'Mode of payment:',
 				ModeOFIncome
 			);
-			setShowAlert(true);
 		}
 	};
 	return (

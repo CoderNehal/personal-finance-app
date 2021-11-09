@@ -15,7 +15,7 @@ const Home = () => {
 		});
 		axios
 			.post(
-				'http://localhost:5000/get-user',
+				'https://finance-database-nehal.herokuapp.com/get-user',
 				{
 					userId: cookie.get('userId'),
 				},

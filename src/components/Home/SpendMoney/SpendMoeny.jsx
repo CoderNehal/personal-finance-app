@@ -40,16 +40,24 @@ const SpendMoney = () => {
 	const [showDropDown, setshowDropDown] = useState(false);
 	const [otherReason, setotherReason] = useState('');
 	const [userId, setUserId] = useState(cookie.get('userId'));
-
+	const [todaysDate, settodaysDate] = useState('');
 	const history = useHistory();
 	const { ref, inView } = useInView({
 		threshold: 1,
 	});
 	const animation = useAnimation();
 	useEffect(() => {
+		var today = new Date();
+		var dd = String(today.getDate()).padStart(2, '0');
+		var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+		var yyyy = today.getFullYear();
+
+		today = mm + '/' + dd + '/' + yyyy;
+		console.log(typeof today);
+		settodaysDate(today);
 		axios
 			.post(
-				'http://localhost:5000/get-user',
+				'https://finance-database-nehal.herokuapp.com/get-user',
 				{
 					userId: userId,
 				},
@@ -93,11 +101,12 @@ const SpendMoney = () => {
 	const UpdateData = (money, reason, OtherReason) => {
 		axios
 			.post(
-				'http://localhost:5000/spend-money',
+				'https://finance-database-nehal.herokuapp.com/spend-money',
 				{
 					money: money,
 					resaon: reason,
 					userId: userId,
+					date: todaysDate,
 					OtherReason: OtherReason,
 				},
 				{

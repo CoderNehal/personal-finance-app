@@ -35,6 +35,7 @@ const AddMoney = () => {
 	const [ModeOFIncome, setModeOFIncome] = useState(null);
 	const [ShowAlert, setShowAlert] = useState(false);
 	const [unMount, setunMount] = useState(false);
+	const [todaysDate, settodaysDate] = useState('');
 	const [userId, setUserId] = useState(cookie.get('userId'));
 	const history = useHistory();
 	const { ref, inView } = useInView({
@@ -42,9 +43,17 @@ const AddMoney = () => {
 	});
 	const animation = useAnimation();
 	useEffect(() => {
+		var today = new Date();
+		var dd = String(today.getDate()).padStart(2, '0');
+		var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+		var yyyy = today.getFullYear();
+
+		today = mm + '/' + dd + '/' + yyyy;
+		console.log(typeof today);
+		settodaysDate(today);
 		axios
 			.post(
-				'http://localhost:5000/get-user',
+				'https://finance-database-nehal.herokuapp.com/get-user',
 				{
 					userId: userId,
 				},
@@ -86,11 +95,12 @@ const AddMoney = () => {
 			setUpdatedBalance(updatedAmmount); // async
 			axios
 				.post(
-					'http://localhost:5000/add-money',
+					'https://finance-database-nehal.herokuapp.com/add-money',
 					{
 						money: AmoutToAdd,
 						resaon: ModeOFIncome,
 						userId: userId,
+						date: todaysDate,
 					},
 					{
 						headers: {

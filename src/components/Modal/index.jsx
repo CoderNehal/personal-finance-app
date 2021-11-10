@@ -26,6 +26,7 @@ const Modal = ({ data, onShowModalChanged }) => {
 		// 	.catch((err) => {
 		// 		console.log(err);
 		// 	});
+
 	};
 	return (
 		<>
@@ -34,7 +35,7 @@ const Modal = ({ data, onShowModalChanged }) => {
 				animate={{ opacity: 1 }}
 				exit={{ opacity: 0 }}
 				transition={{ duration: 0.3 }}
-				className='modal-overlay acitve '>
+				className='modal-overlay '>
 				<div className='modal active  '>
 					<a
 						className='close-modal'
@@ -78,7 +79,7 @@ const Modal = ({ data, onShowModalChanged }) => {
 							<p className='py-3 text-lg  text-black grid grid-cols-2'>
 								<span>Transaction Date :</span>
 								<span>{dateFormat(data.date, 'ddd ,dd mmm yyyy, hh:mm')}</span>
-								{/* date format */}
+							
 							</p>
 							<p className='py-3 text-lg  text-black grid grid-cols-2'>
 								Transaction details <br /> (if any) :

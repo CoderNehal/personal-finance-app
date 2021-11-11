@@ -57,7 +57,7 @@ const AddMoney = () => {
 
 		axios
 			.post(
-				'https://finance-database-nehal.herokuapp.com/get-user',
+				'http://localhost:5000/get-user',
 				{
 					userId: userId,
 				},
@@ -100,7 +100,7 @@ const AddMoney = () => {
 
 			axios
 				.post(
-					'https://finance-database-nehal.herokuapp.com/add-money',
+					'http://localhost:5000/add-money',
 					{
 						money: AmoutToAdd,
 						resaon: ModeOFIncome,

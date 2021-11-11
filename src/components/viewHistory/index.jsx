@@ -8,12 +8,12 @@ import Loading from '../Loading';
 import { AnimatePresence } from 'framer-motion';
 const ViewHistory = () => {
 	const [TransactionHistory, setTransactionHistory] = useState(null);
-	const [chart, setchart] = useState(false);
+	const [chart, setchart] = useState(true);
 	const [isLoading, setisLoading] = useState(false);
 	useEffect(() => {
 		setisLoading(true);
 		axios
-			.get('https://finance-database-nehal.herokuapp.com/view-history', {
+			.get('http://localhost:5000/view-history', {
 				params: {
 					userId: cookie.get('userId'),
 				},

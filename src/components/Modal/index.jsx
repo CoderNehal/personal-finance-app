@@ -10,7 +10,7 @@ const Modal = ({ data, onShowModalChanged }) => {
 	const HandlePrintRecipt = async () => {
 		// axios
 		// 	.post(
-		// 		'https://finance-database-nehal.herokuapp.com/print-recipt',
+		// 		'http://localhost:5000/print-recipt',
 		// 		{
 		// 			data: data,
 		// 		},
@@ -26,7 +26,6 @@ const Modal = ({ data, onShowModalChanged }) => {
 		// 	.catch((err) => {
 		// 		console.log(err);
 		// 	});
-
 	};
 	return (
 		<>
@@ -79,7 +78,6 @@ const Modal = ({ data, onShowModalChanged }) => {
 							<p className='py-3 text-lg  text-black grid grid-cols-2'>
 								<span>Transaction Date :</span>
 								<span>{dateFormat(data.date, 'ddd ,dd mmm yyyy, hh:mm')}</span>
-							
 							</p>
 							<p className='py-3 text-lg  text-black grid grid-cols-2'>
 								Transaction details <br /> (if any) :

@@ -8,12 +8,12 @@ import Loading from '../Loading';
 import { AnimatePresence } from 'framer-motion';
 const ViewHistory = () => {
 	const [TransactionHistory, setTransactionHistory] = useState(null);
-	const [chart, setchart] = useState(true);
+	const [chart, setchart] = useState(false);
 	const [isLoading, setisLoading] = useState(false);
 	useEffect(() => {
 		setisLoading(true);
 		axios
-			.get('http://localhost:5000/view-history', {
+			.get('https://finance-database-nehal.herokuapp.com/view-history', {
 				params: {
 					userId: cookie.get('userId'),
 				},
@@ -23,7 +23,11 @@ const ViewHistory = () => {
 			})
 			.then((res) => {
 				console.log(res.data.TransactionHistory);
-				setTransactionHistory(res.data.TransactionHistory.reverse());
+				setTransactionHistory(
+					res.data.TransactionHistory.sort(function (a, b) {
+						return new Date(b.date) - new Date(a.date);
+					})
+				);
 				setisLoading(false);
 			})
 			.catch((err) => {
@@ -47,7 +51,10 @@ const ViewHistory = () => {
 									className={`px-3 h-8 sm:h-auto sm:py-2 focus:outline-none bg-transparent  border-primary ${
 										chart ? '' : 'border-b-2'
 									}`}
-									onClick={() => setchart(false)}>
+									onClick={() => {
+										console.log('Tabular clicke');
+										setchart(false);
+									}}>
 									Tabular
 								</button>
 								<button

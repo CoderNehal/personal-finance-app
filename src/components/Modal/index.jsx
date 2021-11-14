@@ -10,7 +10,7 @@ const Modal = ({ data, onShowModalChanged }) => {
 	const HandlePrintRecipt = async () => {
 		// axios
 		// 	.post(
-		// 		'http://localhost:5000/print-recipt',
+		// 		'https://finance-database-nehal.herokuapp.com/print-recipt',
 		// 		{
 		// 			data: data,
 		// 		},
@@ -34,7 +34,7 @@ const Modal = ({ data, onShowModalChanged }) => {
 				animate={{ opacity: 1 }}
 				exit={{ opacity: 0 }}
 				transition={{ duration: 0.3 }}
-				className='modal-overlay '>
+				className='modal-overlay'>
 				<div className='modal active  '>
 					<a
 						className='close-modal'
@@ -48,7 +48,7 @@ const Modal = ({ data, onShowModalChanged }) => {
 						</svg>
 					</a>
 					<div className='modal-content '>
-						<h2 className='border-b-2 sm:border-b-0 sm:underline border-black pb-6 sm:pb-0 font-semibold leading-4 whitespace-normal text-2xl px-6 sm:px-2 py-6 text-secondary'>
+						<h2 className='border-b-2 sm:border-b-0 sm:underline border-black  pb-6 sm:pb-3 font-semibold leading-4 whitespace-normal text-2xl px-6 sm:px-2 py-6 text-secondary'>
 							Transaction Details
 						</h2>
 						<div className='w-full h-full px-5 sm:px-16 py-10   flex flex-col '>

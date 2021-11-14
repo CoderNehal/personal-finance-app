@@ -56,10 +56,11 @@ const SpendMoney = () => {
 	useEffect(() => {
 		setisLoading(true);
 		const now = new Date();
+		//now.setDate(12);
 		settodaysDate(date.format(now, 'ddd, MMM DD YYYY hh:mm:A'));
 		axios
 			.post(
-				'http://localhost:5000/get-user',
+				'https://finance-database-nehal.herokuapp.com/get-user',
 				{
 					userId: userId,
 				},
@@ -102,7 +103,7 @@ const SpendMoney = () => {
 	const UpdateData = (money, reason, OtherReason) => {
 		axios
 			.post(
-				'http://localhost:5000/spend-money',
+				'https://finance-database-nehal.herokuapp.com/spend-money',
 				{
 					money: money,
 					resaon: reason,

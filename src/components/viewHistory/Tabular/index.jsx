@@ -3,19 +3,20 @@ import credit from '../../../images/credit.png';
 import debit from '../../../images/debit.png';
 import Modal from '../../Modal';
 import { AnimatePresence, motion } from 'framer-motion';
+
 const Tabular = ({ transactions }) => {
 	const [showModal, setshowModal] = useState(false);
+	const [ShowMore, setShowMore] = useState(5);
 	const [transactionDetails, settransactionDetails] = useState({});
 	return (
 		<motion.div
-			initial={{ x: '-100vw' }}
+			initial={{ x: '-50vw' }}
 			animate={{ x: '0' }}
-			exit={{ x: '-100vw' }}
-			transition={{duration:0.3}}>
+			transition={{ duration: 0.3 }}>
 			{transactions === null ? (
 				<h3>No Transaction found</h3>
 			) : (
-				<div className='-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto'>
+				<div className='-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto '>
 					<div className='inline-block min-w-full shadow-md rounded-lg overflow-hidden'>
 						<table className='min-w-full leading-normal'>
 							<thead>
@@ -39,9 +40,9 @@ const Tabular = ({ transactions }) => {
 							</thead>
 							<tbody>
 								{transactions &&
-									transactions.map((transaction) => {
+									transactions.slice(0, ShowMore).map((transaction) => {
 										return (
-											<tr>
+											<tr className=' border-r-2 border-l-2 '>
 												<td className=' px-3 py-5 border-b sm:text-base border-gray-200 bg-white text-sm'>
 													<div className='flex justify-between items-center '>
 														<div className=' w-10 h-10'>
@@ -113,6 +114,15 @@ const Tabular = ({ transactions }) => {
 							</tbody>
 						</table>
 					</div>
+					{ShowMore <= transactions.length && (
+						<div className='showMoreContainer w-full flex justify-center mt-3'>
+							<button
+								className='px-8 md:px-24 py-3 bg-primary text-white font-semibold text-lg md:text-xl text-center rounded '
+								onClick={() => setShowMore(ShowMore + 5)}>
+								Show More
+							</button>
+						</div>
+					)}
 				</div>
 			)}
 

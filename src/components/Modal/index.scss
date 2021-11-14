@@ -98,10 +98,6 @@ $easing: 'ease-in-out';
   * Mobile styling
   */
 @media only screen and (max-width: 39.9375em) {
-	h1 {
-		font-size: 1.5rem;
-	}
-
 	.modal {
 		position: fixed;
 		top: 0;

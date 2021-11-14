@@ -21,38 +21,19 @@ const Chart = ({ transactions }) => {
 					}
 				}
 			});
+
 		setdatasetForSpent(arr);
 	}, []);
 
-	// const data = {
-	// 	labels: labels,
-	// 	datasets: {
-	// 		label: 'Days of fookin Month',
-	// 		data: labels,
-	// 	},
-	// };
-
+	console.log(datasetForSpent);
 	const date = new Date();
 	const today = date.getUTCDate();
 	const labels = [];
-	// let startDate = today;
-	for (let i = 1; i < Number(today); i++) {
-		// if (datasetForSpent[i]) {
-		labels.push(i);
-
-		// if (startDate == 1) {
-		// 	startDate = 1;
-		// } else {
-		// 	startDate = i;
-		// }
-		// console.log(startDate);
-		// } else {
-		// for (let i = startDate; i <= datasetForSpent.length; i++) {
-		// 	if (!datasetForSpent[i]) {
-		// 		labels[i] = 0;
-		// 	}
-		// }
-		// }
+	const indexesToBeZero = [];
+	for (let i = 1; i <= Number(today); i++) {
+		if (datasetForSpent[i]) {
+			labels.push(i);
+		}
 	}
 
 	const data = {
@@ -60,7 +41,7 @@ const Chart = ({ transactions }) => {
 		datasets: [
 			{
 				label: 'Spent',
-				data: datasetForSpent,
+				data: datasetForSpent.filter((e) => e !== null),
 				// data: datasetForSpent.map((e) => {
 				// 	if (e == null) {
 				// 		return 0;
@@ -69,16 +50,17 @@ const Chart = ({ transactions }) => {
 				// 		return e;
 				// 	}
 				// }),
+
 				fill: true,
-				backgroundColor: 'rgba(75,192,192,0.2)',
-				borderColor: 'rgba(75,192,192,1)',
+				backgroundColor: 'rgba(148,42,136,0.2)',
+				borderColor: 'rgba(148,42,136,1)',
 			},
 		],
 	};
 
 	return (
 		<motion.div
-			initial={{ x: '+100vw' }}
+			initial={{ x: '+50vw' }}
 			animate={{ x: '0' }}
 			exit={{ x: '+100vw' }}
 			transition={{ duration: 0.3 }}

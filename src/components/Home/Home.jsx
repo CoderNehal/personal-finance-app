@@ -20,7 +20,7 @@ const Home = () => {
 		});
 		axios
 			.post(
-				'http://localhost:5000/get-user',
+				'https://finance-database-nehal.herokuapp.com/get-user',
 				{
 					userId: cookie.get('userId'),
 				},
@@ -68,7 +68,7 @@ const Home = () => {
 									transition={{ duration: 0.5, delay: 0.7 }}
 									style={{ height: '1.5px', background: '#eeeeee' }}
 								/>
-								<p className='text-lg text-center  text-green pt-3'>
+								<p className='text-lg sm:text-xl text-center  text-green pt-3'>
 									Total Balance
 								</p>
 							</motion.div>

@@ -13,14 +13,12 @@ const Home = () => {
 	const [isLoading, setisLoading] = useState(false);
 	useEffect(() => {
 		setisLoading(true);
-		const now = new Date();
-		console.log(date.format(now, 'ddd, MMM DD YYYY hh:mm:A'));
-		cookie.set('userId', '0c681a1e-c0aa-4d73-9480-8e40f81be433', {
-			expires: 1,
-		});
+
+		console.log(process.env.REACT_APP_BASE_URL);
+
 		axios
 			.post(
-				'https://finance-database-nehal.herokuapp.com/get-user',
+				process.env.REACT_APP_BASE_URL + 'get-user',
 				{
 					userId: cookie.get('userId'),
 				},

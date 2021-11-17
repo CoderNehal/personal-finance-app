@@ -13,7 +13,7 @@ const ViewHistory = () => {
 	useEffect(() => {
 		setisLoading(true);
 		axios
-			.get('https://finance-database-nehal.herokuapp.com/view-history', {
+			.get(process.env.REACT_APP_BASE_URL + 'view-history', {
 				params: {
 					userId: cookie.get('userId'),
 				},

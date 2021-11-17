@@ -8,6 +8,7 @@ import ToRedirect from "./components/ToRedirect/ToRedirect";
 import AddMoney from "./components/Home/AddMoney/AddMoney";
 import SpendMoney from "./components/Home/SpendMoney/SpendMoeny";
 import ViewHistory from "./components/viewHistory";
+import Signup from "./components/Signup/Signup";
 
 
 const App = () => {
@@ -33,15 +34,16 @@ const App = () => {
     <Router>
 
       <div className=' bg-white h-screen m-0 text-white overflow-x-hidden '>
-        <Navbar />
+        <Navbar isLogged={Auth.getAuth()} />
         <Switch>
-          <Route path='/home' exact component={Home} />
-          <Route path="/about" exact component={About} />
+          <PrivateRoute path='/home' exact component={Home} />
+          <PrivateRoute path="/about" exact component={About} />
+          <PrivateRoute path="/" exact component={ToRedirect} />
+          <PrivateRoute path='/add-money' component={AddMoney} />
+          <PrivateRoute path='/spend-money' component={SpendMoney} />
+          <PrivateRoute path='/view-history' component={ViewHistory} />
           <Route path="/login" exact component={Login} />
-          <Route path="/" exact component={ToRedirect} />
-          <Route path='/add-money' component={AddMoney} />
-          <Route path='/spend-money' component={SpendMoney} />
-          <Route path='/view-history' component={ViewHistory} />
+          <Route path='/signup' component={Signup} />
 
         </Switch>
       </div>

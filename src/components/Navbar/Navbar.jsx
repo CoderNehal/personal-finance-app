@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import Auth from '../Auth/Auth';
 import './Navbar.scss';
 
-const Navbar = () => {
-	const [isLogged, setisLogged] = useState(localStorage.getItem('isLogged'));
+const Navbar = ({ isLogged }) => {
+	const [Logged, setLogged] = useState(isLogged);
+	
 	return (
 		<nav className='nav bg-secondary flex flex-wrap items-center justify-between px-6 md:px-16 py-4 border-b-2 border-gray-400  shadow-md'>
 			<div className='flex flex-no-shrink items-center mr-6 py-3 text-grey-darkest'>
@@ -46,12 +48,14 @@ const Navbar = () => {
 					</NavLink>
 				</li>
 
-				{isLogged ? (
+				{Logged ? (
 					<li className='border-t md:border-none'>
 						<button
 							className='block md:inline-block px-4 py-3 text-red hover:text-grey-darker'
 							onClick={() => {
-								setisLogged(false);
+								setLogged(false);
+								Auth.signout();
+								window.location.reload(true);
 							}}
 							style={{ color: 'red' }}>
 							Logout

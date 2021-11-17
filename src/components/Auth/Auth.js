@@ -8,8 +8,11 @@ const Auth = {
     },
     signout() {
         Cookies.remove('jwt')
+        Cookies.remove('userId')
+
         this.isAuthenticated = false
         localStorage.setItem('isLogged', false);
+
         console.log('Signed out')
     },
     getAuth() {

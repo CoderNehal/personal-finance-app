@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import Auth from '../Auth/Auth';
 import './Navbar.scss';
 
-const Navbar = ({ isLogged }) => {
-	const [Logged, setLogged] = useState(isLogged);
-	
+const Navbar = () => {
+	const [Logged, setLogged] = useState(localStorage.getItem('isLogged'));
+	const Location = useLocation();
+	useEffect(() => {
+		console.log(Logged);
+		setLogged(localStorage.getItem('isLogged'));
+		console.log('Navbar rendered');
+	}, [Location]);
 	return (
 		<nav className='nav bg-secondary flex flex-wrap items-center justify-between px-6 md:px-16 py-4 border-b-2 border-gray-400  shadow-md'>
 			<div className='flex flex-no-shrink items-center mr-6 py-3 text-grey-darkest'>
@@ -24,11 +29,23 @@ const Navbar = ({ isLogged }) => {
 				<span className='font-semibold text-xl tracking-tight'>EveryRupee</span>
 			</div>
 
-			<input className='menu-btn hidden ' type='checkbox' id='menu-btn' />
+			<input class='menu-btn hidden' type='checkbox' id='menu-btn' />
 			<label
-				className='menu-icon block cursor-pointer md:hidden px-2 py-4 relative select-none'
+				class='menu-icon  block cursor-pointer md:hidden px-2 py-4 relative select-none'
 				htmlFor='menu-btn'>
-				<span className='navicon bg-grey-darkest flex items-center relative'></span>
+				<svg
+					xmlns='http://www.w3.org/2000/svg'
+					className='h-6 w-6'
+					fill='none'
+					viewBox='0 0 24 24'
+					stroke='currentColor'>
+					<path
+						strokeLinecap='round'
+						strokeLinejoin='round'
+						strokeWidth={2}
+						d='M4 6h16M4 12h16M4 18h16'
+					/>
+				</svg>
 			</label>
 
 			<ul className='menu border-b md:border-none flex justify-end list-reset m-0 w-full md:w-auto'>
@@ -48,14 +65,14 @@ const Navbar = ({ isLogged }) => {
 					</NavLink>
 				</li>
 
-				{Logged ? (
+				{Logged == 'true' ? (
 					<li className='border-t md:border-none'>
 						<button
-							className='block md:inline-block px-4 py-3 text-red hover:text-grey-darker'
+							className='block md:inline-block px-7 ml-5 py-1 mt-2 text-red hover:text-grey-darker border-gray-400 border text-center rounded-sm'
 							onClick={() => {
 								setLogged(false);
-								Auth.signout();
 								window.location.reload(true);
+								Auth.signout();
 							}}
 							style={{ color: 'red' }}>
 							Logout

@@ -47,17 +47,17 @@ const Home = () => {
 			) : (
 				<div className='HomeContainer w-screen   cursor-default  relative pt-16 '>
 					{
-						<motion.div
+						<div
 							initial={{ width: 0 }}
 							animate={{ width: '91.666667%' }}
 							transition={{ duration: 0.5 }}
 							className='currentAmountBox  rounded-md mx-auto w-11/12 border flex flex-col justify-between items-center font-semibold  bg-white py-3 border-gray-500  '>
 							<div className='BlankDiv'></div>
-							<motion.div
+							<div
 								initial={{ y: -30, opacity: 0 }}
 								animate={{ y: 0, opacity: 1 }}
 								transition={{ duration: 0.7, delay: 0.3 }}>
-								<div className='amount text-4xl    md:text-8xl  text-green px-5 md:px-16'>
+								<div className='amount text-4xl  overflow-hidden   md:text-8xl  text-green px-5 md:px-16'>
 									₹ {Balance.toLocaleString()}
 								</div>
 								<motion.hr
@@ -69,9 +69,9 @@ const Home = () => {
 								<p className='text-lg sm:text-xl text-center  text-green pt-3'>
 									Total Balance
 								</p>
-							</motion.div>
+							</div>
 							<div className='flex justify-between w-full md:w-3/4'>
-								<motion.div
+								<div
 									initial={{ y: 30, opacity: 0 }}
 									animate={{ y: 0, opacity: 1 }}
 									transition={{ duration: 0.7, delay: 1.3 }}
@@ -88,9 +88,9 @@ const Home = () => {
 										}}
 									/>
 									₹{SpentLastMonth.toLocaleString()}
-								</motion.div>
+								</div>
 
-								<motion.div
+								<div
 									initial={{ y: 30, opacity: 0 }}
 									animate={{ y: 0, opacity: 1 }}
 									transition={{ duration: 0.7, delay: 1.3 }}
@@ -107,29 +107,20 @@ const Home = () => {
 										}}
 									/>
 									₹{SpentLastYear.toLocaleString()}
-								</motion.div>
+								</div>
 							</div>
-						</motion.div>
+						</div>
 					}
 
-					<div className='buttons flex flex-col px-12 lg:px-0 lg:flex-row justify-between items-center w-11/12 mx-auto mt-4 text-white h-full md:h-52  '>
-						{/* <button className='rounded text-lg btn-border-1 px-36 py-0 xl:py-4 mt-4 xl:mt-0   transition duration-200 ease-in bg-green'>
-					Add money
-				</button>
-				<button className='rounded text-lg btn-border-1 px-36 py-0 xl:py-4 mt-4 xl:mt-0   transition duration-200 ease-in bg-red'>
-					Spent Money
-				</button>
-				<button className='rounded text-lg btn-border-1 px-36 py-0 xl:py-4 mt-4 xl:mt-0 transition duration-200 ease-in bg-yellow-300'>
-					View History
-				</button> */}
-						<motion.div
+					<div className='buttons flex flex-col md:px-12 lg:px-0 lg:flex-row justify-between items-center  w-11/12 mx-auto mt-4 text-white h-full md:h-52  '>
+						<div
 							initial={{ x: '-100vw' }}
 							animate={{ x: 0 }}
 							transition={{
 								duration: 0.7,
 							}}>
 							<Link
-								className='btn btn-border-1 w-3/4 sm:w-auto mx-auto  border-none outline-none px-36 py-0 xl:py-4 mt-4 xl:mt-0 rounded border-gray-300 text-sm md:text-lg text-center relative flex justify-center items-center text-white bg-green  '
+								className='btn bg-green  flex justify-content-center items-center min-w-full px-cs  md:px-36 py-3 md:py-4  lg:text-xl  rounded-sm md:rounded   sm:w-auto mx-auto border-gray-300  whitespace-nowrap'
 								to='/add-money'>
 								<svg
 									xmlns='http://www.w3.org/2000/svg'
@@ -144,17 +135,17 @@ const Home = () => {
 										d='M12 4v16m8-8H4'
 									/>
 								</svg>
-								<span className='ml-6 md:ml-3'>Add Money</span>
+								<span className='ml-6 md:ml-3 '>Add Money</span>
 							</Link>
-						</motion.div>
-						<motion.div
+						</div>
+						<div
 							initial={{ x: '-100vw' }}
 							animate={{ x: 0 }}
 							transition={{
 								duration: 1,
 							}}>
 							<Link
-								className='btn btn-border-1 w-3/4 sm:w-auto mx-auto  px-36 py-0 xl:py-4 mt-4 xl:mt-0 rounded border-gray-300 text-sm md:text-lg text-center relative flex justify-center items-center text-white bg-red'
+								className='btn bg-red flex justify-content-center items-center mt-4 md:mt-0 px-20 md:px-36 py-3 md:py-4  lg:text-xl rounded-sm md:rounded sm:w-auto mx-auto border-gray-300 whitespace-nowrap'
 								to='/spend-money'>
 								<svg
 									xmlns='http://www.w3.org/2000/svg'
@@ -172,15 +163,15 @@ const Home = () => {
 
 								<span className='ml-6 md:ml-3'>Spend Money</span>
 							</Link>
-						</motion.div>
-						<motion.div
+						</div>
+						<div
 							initial={{ x: '-100vw' }}
 							animate={{ x: 0 }}
 							transition={{
 								duration: 1.3,
 							}}>
 							<Link
-								className='btn btn-border-1 w-3/4 sm:w-auto mx-auto  px-36 py-0 xl:py-4 mt-4 xl:mt-0 rounded border-gray-300 text-sm md:text-lg text-center relative flex justify-center items-center text-white bg-yellow-300'
+								className='btn bg-yellow-300 flex justify-content-center items-center mt-4 md:mt-0 px-20 md:px-36 py-3 md:py-4  lg:text-xl  rounded-sm md:rounded   sm:w-auto mx-auto border-gray-300 whitespace-nowrap'
 								to='/view-history'>
 								<svg
 									xmlns='http://www.w3.org/2000/svg'
@@ -198,7 +189,7 @@ const Home = () => {
 
 								<span className='ml-6 md:ml-3'>View History</span>
 							</Link>
-						</motion.div>
+						</div>
 					</div>
 					<div className='rounded-full text-white text-center w-8 absolute right-8 md:right-16 mt-12	 md:mt-0'>
 						<div className='help-tip'>

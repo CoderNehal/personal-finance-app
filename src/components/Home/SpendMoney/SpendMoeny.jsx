@@ -444,7 +444,7 @@ const SpendMoney = () => {
 								</div>
 
 								<div
-									className={`lowerPart h-1/2 flex flex-col ${
+									className={` lowerPart h-1/2 flex flex-col ${
 										other ? ' justify-end' : 'justify-between'
 									} items-center py-3`}>
 									{other ? null : (
@@ -454,7 +454,7 @@ const SpendMoney = () => {
 											</div>
 											<motion.div
 												ref={ref}
-												className='lg:px-8 py-6 flex h-full w-3/4 justify-between items-center'>
+												className=' lg:px-8 py-6 flex h-full md:h-1/2 w-3/4 justify-between items-center'>
 												<motion.div
 													initial={{ scale: 0, rotate: 180 }}
 													animate={animation}

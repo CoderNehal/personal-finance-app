@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import credit from '../../../images/credit.png';
 import debit from '../../../images/debit.png';
-import Modal from '../../Modal';
-import { AnimatePresence, motion } from 'framer-motion';
+
+import { motion } from 'framer-motion';
 
 const Tabular = ({ transactions }) => {
-	const [showModal, setshowModal] = useState(false);
 	const [ShowMore, setShowMore] = useState(5);
-	const [transactionDetails, settransactionDetails] = useState({});
+	// const [transactionDetails, settransactionDetails] = useState({});
+
 	return (
 		<motion.div
 			initial={{ x: '-50vw' }}
@@ -98,15 +99,17 @@ const Tabular = ({ transactions }) => {
 													</span>
 												</td>
 												<td className=' text-center px-3 py-5 border-b sm:text-base border-gray-200 bg-white text-sm '>
-													<button
-														type='button'
-														className='inline-block bg-green text-white text-sm rounded  px-2 py-1 capitalize '
-														onClick={() => {
-															settransactionDetails(transaction);
-															setshowModal(true);
+													<Link
+														to={{
+															pathname: '/transaction-details',
+															query: transaction,
 														}}>
-														details
-													</button>
+														<button
+															type='button'
+															className='inline-block bg-green text-white text-sm rounded  px-2 py-1 capitalize '>
+															details
+														</button>
+													</Link>
 												</td>
 											</tr>
 										);
@@ -125,15 +128,6 @@ const Tabular = ({ transactions }) => {
 					)}
 				</div>
 			)}
-
-			<AnimatePresence>
-				{showModal && (
-					<Modal
-						data={transactionDetails}
-						onShowModalChanged={() => setshowModal(false)}
-					/>
-				)}
-			</AnimatePresence>
 		</motion.div>
 	);
 };

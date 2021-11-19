@@ -9,7 +9,11 @@ module.exports = {
         secondary: '#590995',
         red: '#C62A88',
         green: '#03C4A1'
-      }
+      },
+      padding: {
+       
+        cs:'5.5rem'
+       }
     },
   },
   variants: {

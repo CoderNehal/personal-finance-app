@@ -1,13 +1,12 @@
 .HomeContainer {
 	height: auto;
-	min-height: 89vh;
-	background: url('../../images/bg.png') no-repeat ;
+	min-height: 89.9vh;
+	background: url('../../images/bg.png') no-repeat;
 	background-size: cover;
-	
+
 	object-fit: contain;
-	@media (min-width:480px) {
-	min-height: 88.7vh;
-		
+	@media (min-width: 480px) {
+		min-height: 89.7vh;
 	}
 }
 .currentAmountBox {
@@ -20,62 +19,8 @@
 .btn {
 	letter-spacing: 1px;
 	text-decoration: none;
-
+	
 	cursor: pointer;
-	transition: ease-out 0.5s;
-	-webkit-transition: ease-out 0.5s;
-	-moz-transition: ease-out 0.5s;
-}
-.btn-border-1 {
-	&::after {
-		position: absolute;
-		content: '';
-		width: 0%;
-		height: 0%;
-		visibility: hidden;
-		margin-right: 1px;
-		border-radius: 0.25rem;
-		bottom: -2px;
-		right: -2px;
-		border-left: 2.5px solid #150485;
-		border-bottom: 2.5px solid #150485;
-		transition: width 0.1s ease 0.1s, height 0.1s ease, visibility 0s 0.2s;
-	}
-	&::before {
-		position: absolute;
-		content: '';
-		width: 0%;
-		height: 0%;
-		visibility: hidden;
-		margin-left: 1px;
-		border-radius: 0.25rem;
-		top: -2px;
-		left: -2px;
-		border-top: 2.5px solid #150485;
-		border-right: 2.5px solid #150485;
-		transition: width 0.1s ease 0.3s, height 0.1s ease 0.2s, visibility 0s 0.4s;
-	}
-	&:hover {
-		animation: 1s ease-out 0.4s;
-
-		&::after {
-			width: calc(100% + 2px);
-			height: calc(100% + 2px);
-			visibility: visible;
-			transition: width 0.1s ease 0.2s, height 0.1s ease 0.3s,
-				visibility 0s 0.2s;
-			transition: width 0.1s ease 0.2s, height 0.1s ease 0.3s,
-				visibility 0s 0.2s;
-		}
-		&::before {
-			width: calc(100% + 2px);
-			height: calc(100% + 2px);
-			visibility: visible;
-			transition: width 0.1s ease 0.2s, height 0.1s ease 0.3s,
-				visibility 0s 0.2s;
-			transition: width 0.1s ease, height 0.1s ease 0.1s;
-		}
-	}
 }
 
 /* The icon */

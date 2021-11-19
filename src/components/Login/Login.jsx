@@ -3,93 +3,111 @@ import React, { useState } from 'react';
 import cookie from 'js-cookie';
 // import './Login.scss';
 import Auth from '../Auth/Auth';
-import { Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import login from '../../images/login.jpg';
 const Login = () => {
+	const history = useHistory();
 	const [email, setemail] = useState('');
 	const [password, setpassword] = useState('');
-	const [data, setdata] = useState([]);
+
 	const [Emailerror, setEmailerror] = useState('');
 	const [Passworderror, setPassworderror] = useState('');
 	const [redirect, setredirect] = useState(false);
 	const [ShowAlert, setShowAlert] = useState(false);
 	const handleLogin = () => {
-		if (redirect) {
-			return <Redirect to='/home' />;
-		}
+		setShowAlert(false);
 		setEmailerror('');
 		setPassworderror('');
-		axios
-			.post(
-				process.env.REACT_APP_BASE_URL + 'login',
-				{
-					email: email,
-					password: password,
-				},
-				{
-					headers: {
-						'content-type': 'application/json',
+		if (email.trim() == '') {
+			setEmailerror('Email Cannot be blank');
+		}
+
+		if (password.trim() == '') {
+			setPassworderror('Password canot be Empty');
+		} else if (email.trim() != '' && password.trim().length >= 6) {
+			axios
+				.post(
+					process.env.REACT_APP_BASE_URL + 'login',
+					{
+						email: email,
+						password: password,
 					},
-				}
-			)
-			.then((res) => {
-				console.log(res);
-				cookie.set('jwt', res.data.token);
-				cookie.set('userId', res.data.user.userId, {
-					expires: 1,
+					{
+						headers: {
+							'content-type': 'application/json',
+						},
+					}
+				)
+				.then((res) => {
+					console.log(res);
+					cookie.set('jwt', res.data.token, {
+						expires: new Date().getDate() + 3,
+					});
+					cookie.set('userId', res.data.user.userId, {
+						expires: new Date().getDate() + 3000,
+					});
+					Auth.authenticate();
+					setShowAlert(true);
+					setTimeout(() => {
+						history.replace('/home');
+					}, 1000);
+				})
+				.catch((error) => {
+					console.log(error.response.data);
+					// console.log(error.response.status);
+					// console.log(error.response.headers);
+					if (error.response.data.Error.includes('User'))
+						setEmailerror(error.response.data.Error);
+					else {
+						setPassworderror(error.response.data.Error);
+					}
 				});
-				Auth.authenticate();
-				setShowAlert(true);
-			})
-			.catch((error) => {
-				console.log(error.response.data);
-				// console.log(error.response.status);
-				// console.log(error.response.headers);
-				if (error.response.data.Error.includes('User'))
-					setEmailerror(error.response.data.Error);
-				else {
-					setPassworderror(error.response.data.Error);
-				}
-			});
+		} else {
+			setPassworderror('Password must be 6 letters long');
+		}
 	};
 	return (
-		<div className='flex md:grid md:grid-cols-2 ' style={{ height: '45rem' }}>
-			<div className='text-black hidden  md:flex justify-end items-center '>
-				<img
-					src='https://image.freepik.com/free-vector/online-registration-sign-up-concept-with-man-character_268404-98.jpg'
-					alt=''
-					className=''
-				/>
+		<div className='flex md:grid md:grid-cols-2 ' style={{ height: '80%' }}>
+			<div className='text-black hidden  md:flex justify-end md:items-center '>
+				<img src={login} alt='' className='' />
 			</div>
-			<div className=' col-span-2 md:col-span-1 w-full max-w-md my-auto  rounded-lg border border-primaryBorder shadow-default py-10 px-16 shadow-md'>
+			<div className=' col-span-2 md:col-span-1 w-full max-w-md my-auto  md:rounded-lg md:border  border-primaryBorder shadow-default py-6 px-12 md:shadow-md'>
 				<h1 className='text-2xl font-medium text-primary mt-12 mb-12 text-center'>
 					Log in to your account
 				</h1>
 
 				<div>
-					<label htmlFor='email'>Email</label>
+					<label className='text-primary ' htmlFor='email'>
+						Email
+					</label>
 					<input
 						type='email'
-						className={`w-full p-3 sm:p-2 text-primary border rounded-md outline-none text-base  transition duration-150 ease-in-out mb-2`}
+						className={`w-full p-3 mb-4 mt-2
+						 sm:p-2 text-primary border rounded-md outline-none text-base  transition duration-150 ease-in-out`}
 						id='email'
 						value={email}
 						onChange={(e) => setemail(e.target.value)}
 						placeholder='Your Email'
 					/>
 				</div>
-				<p className='text-red text-sm'>{Emailerror}</p>
+				<p className='text-red text-sm -mt-3 mb-3'>{Emailerror}</p>
+
 				<div>
-					<label htmlFor='password'>Password</label>
+					<label className='text-primary ' htmlFor='password'>
+						Password
+					</label>
 					<input
 						type='password'
-						className={`w-full p-3 sm:p-2 text-primary border rounded-md outline-none text-base   transition duration-150 ease-in-out mb-4`}
+						className={`w-full p-3 mb-4 mt-2
+						 sm:p-2 text-primary border rounded-md outline-none text-base   transition duration-150 ease-in-out`}
 						id='password'
 						value={password}
 						onChange={(e) => setpassword(e.target.value)}
 						placeholder='Your Password'
 					/>
 				</div>
-				<p className='text-red text-sm'>{Passworderror}</p>
+				<p className='text-red text-sm -mt-3 mb-3'>{Passworderror}</p>
 
 				<div className='flex justify-center items-center mt-6 mb-12'>
 					<button

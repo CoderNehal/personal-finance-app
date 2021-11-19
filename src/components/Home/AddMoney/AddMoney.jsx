@@ -170,7 +170,7 @@ const AddMoney = () => {
 											transition={{ duration: 1 }}
 											animate={{ opacity: 0.7, x: 0 }}
 											exit={{ opacity: 0 }}
-											className='currentBalance h-1/2 text-4xl md:text-6xl flex flex-col justify-center items-center text-black'>
+											className='currentBalance h-1/2 text-3xl md:text-6xl flex flex-col justify-center items-center text-black whitespace-nowrap'>
 											₹ {CurrentBalance.toLocaleString()}
 											<p className='text-base md:text-lg pb-4 md:pt-4 md:pb-0 text-center'>
 												Current Balance
@@ -181,14 +181,14 @@ const AddMoney = () => {
 											transition={{ duration: 1 }}
 											animate={{ opacity: 1, x: 0 }}
 											exit={{ opacity: 0 }}
-											className='updatedBalance h-1/2 text-4xl md:text-6xl flex flex-col justify-center items-center text-green'>
+											className='updatedBalance h-1/2 text-3xl md:text-6xl flex flex-col justify-center items-center text-green whitespace-nowrap '>
 											<AnimatedNumber
 												value={UpdatedBalance}
 												formatValue={formatValue}
 												duration={250}
 											/>
 											<p className='text-base md:text-lg pb-4 md:pt-4 md:pb-0 text-center'>
-												Balance After Adding Money
+												After Adding
 											</p>
 										</motion.div>
 									</>
@@ -198,7 +198,7 @@ const AddMoney = () => {
 						<div className=' w-full md:w-1/2 px-0 py-3 md:px-16 h-full  '>
 							<div className=' bg-image border h-full lg:w-11/12  flex flex-col text-black rounded-md '>
 								<div className='upperPart h-1/2 flex flex-col justify-between items-center py-5'>
-									<div className='text-green text-lg lg:text-xl'>
+									<div className='text-green text-center text-lg lg:text-xl'>
 										How much would you like to add?
 									</div>
 									<div className='-ml-4 py-6 lg:py-0'>
@@ -218,7 +218,7 @@ const AddMoney = () => {
 										variants={container}
 										initial='hidden'
 										animate='visible'
-										className='MoneyOptions grid grid-cols-2 gap-3  sm:flex sm:justify-between sm:items-center sm:w-3/4 h-60 lg:h-1/2 flex-wrap px-10'>
+										className='MoneyOptions grid grid-cols-2 gap-3  sm:flex sm:justify-between sm:items-center sm:w-3/4 h-auto lg:h-1/2 flex-wrap px-0 md:px-10'>
 										<motion.div
 											variants={item}
 											className='py-1 px-3 cursor-pointer rounded-md my-auto text-center border-2 text-lg  border-green  text-primary hover:bg-green hover:text-white transition-all duration-400 ease-in-out'
@@ -285,13 +285,13 @@ const AddMoney = () => {
 										</motion.div>
 									</motion.div>
 								</div>
-								<div className='lowerPart h-1/2 flex flex-col justify-between items-center py-3'>
-									<div className='text-green text-lg lg:text-xl'>
+								<div className='lowerPart  h-1/2   flex flex-col justify-between items-center py-3'>
+									<div className='text-green text-lg lg:text-xl '>
 										What is the source of income?
 									</div>
 									<motion.div
 										ref={ref}
-										className='lg:px-8 py-6 flex h-full w-3/4 justify-between items-center '>
+										className='  lg:px-8 py-6 flex h-full md:h-1/2 w-11/12 md:w-3/4 justify-between items-center '>
 										<motion.div
 											initial={{ scale: 0, rotate: 180 }}
 											animate={animation}

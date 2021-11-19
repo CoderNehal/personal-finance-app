@@ -68,7 +68,7 @@ const Navbar = () => {
 				{Logged == 'true' ? (
 					<li className='border-t md:border-none'>
 						<button
-							className='block md:inline-block px-7 ml-5 py-1 mt-2 text-red hover:text-grey-darker border-gray-400 border text-center rounded-sm'
+							className='block md:inline-block  md:px-7 ml-3 md:ml-5 py-1 my-2 md:mt-2  text-red hover:text-grey-darker border-gray-400 md:border md:text-center rounded-sm'
 							onClick={() => {
 								setLogged(false);
 								window.location.reload(true);

@@ -43,8 +43,8 @@ const ViewHistory = () => {
 	return (
 		<>
 			<div className='tabular text-black'>
-				<div className='container mx-auto px-4 sm:px-8'>
-					<div className='py-8'>
+				<div className=' mx-auto px-4 sm:px-8 ' >
+					<div className='py-8 '>
 						<div className='sm:flex sm:justify-between'>
 							<h2 className='text-2xl font-semibold text-left leading-tight mb-4 underline flex '>
 								<button

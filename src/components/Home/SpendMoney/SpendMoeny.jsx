@@ -172,32 +172,35 @@ const SpendMoney = () => {
 				<Loading />
 			) : (
 				<div className='SpendMoneyContainer p-8  relative'>
-					<div className='absolute  cursor-pointer w-12 h-12 '>
-						<button
-							className=' absolute text-black  '
-							onClick={() => history.goBack()}>
-							<svg
-								xmlns='http://www.w3.org/2000/svg'
-								className='h-6 w-6 md:h-8 md:w-8 '
-								fill='none'
-								viewBox='0 0 24 24'
-								stroke='currentColor'>
-								<path
-									strokeLinecap='round'
-									strokeLinejoin='round'
-									strokeWidth={2}
-									d='M10 19l-7-7m0 0l7-7m-7 7h18'
-								/>
-							</svg>
-						</button>
-					</div>
 					<div className='flex flex-col md:flex-row justify-between h-full items-center  '>
+						{/*Back Button */}
+						<div className='bckbtn h-full'>
+							<button
+								className='   text-black  cursor-pointer w-12 h-12 top-0 left-0'
+								onClick={() => {
+									history.goBack();
+								}}>
+								<svg
+									xmlns='http://www.w3.org/2000/svg'
+									className='h-6 w-6 md:h-8 md:w-8 '
+									fill='none'
+									viewBox='0 0 24 24'
+									stroke='currentColor'>
+									<path
+										strokeLinecap='round'
+										strokeLinejoin='round'
+										strokeWidth={2}
+										d='M10 19l-7-7m0 0l7-7m-7 7h18'
+									/>
+								</svg>
+							</button>
+						</div>
 						<div className=' w-1/2 h-full flex flex-col  '>
 							<motion.div
 								initial={{ opacity: 0, x: -50 }}
 								transition={{ duration: 1 }}
 								animate={{ opacity: 0.7, x: 0 }}
-								className='currentBalance h-1/2 text-4xl md:text-6xl flex flex-col justify-center items-center text-black'>
+								className='currentBalance h-1/2 text-3xl md:text-6xl flex flex-col justify-center items-center text-black'>
 								₹ {CurrentBalance.toLocaleString()}
 								<p className='text-base md:text-lg pb-4 md:pt-4 md:pb-0 text-center'>
 									Current Balance
@@ -209,7 +212,7 @@ const SpendMoney = () => {
 									duration: 1,
 								}}
 								animate={{ opacity: 1, x: 0 }}
-								className='updatedBalance h-1/2 text-4xl md:text-6xl flex flex-col justify-center items-center text-red'>
+								className='updatedBalance h-1/2 text-3xl md:text-6xl flex flex-col justify-center items-center text-red'>
 								<AnimatedNumber
 									value={UpdatedBalance}
 									formatValue={formatValue}
@@ -228,14 +231,14 @@ const SpendMoney = () => {
 									</div>
 									{other ? (
 										<>
-											<div className=' py-12 px-5 md:px-6 w-full grid grid-cols-3 gap-8'>
+											<div className=' py-10 px-5 md:px-6 w-full grid grid-cols-3 gap-8 overflow-hidden'>
 												<motion.div
 													initial={{ opacity: 0 }}
 													animate={{ opacity: 1 }}
 													transition={{
 														duration: 1,
 													}}
-													className=' h-28 lg:h-11/12 mx-auto md:mx-6 md:pt-3  cursor-pointer flex flex-col items-center justify-center   border-black '
+													className=' h-28 lg:h-11/12 mx-auto md:mx-6 md:py-3  cursor-pointer flex flex-col items-center justify-center   border-black '
 													id='Other'
 													onClick={(e) => {
 														handleIncomeSource(
@@ -243,13 +246,17 @@ const SpendMoney = () => {
 															e.currentTarget.id
 														);
 													}}>
-													<img src={Food} className='h-full w-full' alt='' />
-													<p className='text-sm text-red font-semibold uppercase pt-0  md:pt-3'>
+													<img
+														src={Food}
+														className='h-full w-full p-2 md:py-0 '
+														alt=''
+													/>
+													<p className='text-sm text-red font-semibold uppercase pt-1'>
 														Other
 													</p>
 												</motion.div>
 
-												<div className='dropdown  relative col-span-2 flex flex-col justify-between items-center '>
+												<div className='dropdown  col-span-2 flex flex-col justify-between items-center  '>
 													<motion.button
 														initial={{ opacity: 0, y: -20 }}
 														animate={{ opacity: 1, y: 0 }}

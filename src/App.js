@@ -36,7 +36,7 @@ const App = () => {
   return (
     <Router>
 
-      <div className=' bg-white h-screen m-0 text-white overflow-x-hidden '>
+      <div className='w-screen bg-white h-screen m-0 text-white overflow-x-hidden '>
         <Navbar isLogged={Auth.getAuth()} />
         <Switch>
           <PrivateRoute path='/home' exact component={Home} />

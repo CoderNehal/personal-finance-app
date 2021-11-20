@@ -36,7 +36,6 @@ const AddMoney = () => {
 	const [AmoutToAdd, setAmoutToAdd] = useState();
 	const [ModeOFIncome, setModeOFIncome] = useState(null);
 	const [ShowAlert, setShowAlert] = useState(false);
-	const [unMount, setunMount] = useState(false);
 	const [todaysDate, settodaysDate] = useState('');
 	const [userId, setUserId] = useState(cookie.get('userId'));
 	const [isLoading, setisLoading] = useState(false);
@@ -138,62 +137,56 @@ const AddMoney = () => {
 				<Loading />
 			) : (
 				<div className='AddMoneyContainer p-8  relative'>
-					<button
-						className=' absolute text-black  cursor-pointer w-12 h-12 '
-						onClick={() => {
-							setunMount(true);
-							setTimeout(() => {
-								history.goBack();
-							}, 1000);
-						}}>
-						<svg
-							xmlns='http://www.w3.org/2000/svg'
-							className='h-6 w-6 md:h-8 md:w-8 '
-							fill='none'
-							viewBox='0 0 24 24'
-							stroke='currentColor'>
-							<path
-								strokeLinecap='round'
-								strokeLinejoin='round'
-								strokeWidth={2}
-								d='M10 19l-7-7m0 0l7-7m-7 7h18'
-							/>
-						</svg>
-					</button>
-					<div className='flex flex-col md:flex-row justify-between h-full items-center '>
+					<div className='flex flex-col md:flex-row justify-between h-full items-center  '>
+						{/*Back Button */}
+						<div className='bckbtn h-full'>
+							<button
+								className='   text-black  cursor-pointer w-12 h-12 top-0 left-0'
+								onClick={() => {
+									history.goBack();
+								}}>
+								<svg
+									xmlns='http://www.w3.org/2000/svg'
+									className='h-6 w-6 md:h-8 md:w-8 '
+									fill='none'
+									viewBox='0 0 24 24'
+									stroke='currentColor'>
+									<path
+										strokeLinecap='round'
+										strokeLinejoin='round'
+										strokeWidth={2}
+										d='M10 19l-7-7m0 0l7-7m-7 7h18'
+									/>
+								</svg>
+							</button>
+						</div>
 						<div className=' w-1/2 h-full flex flex-col '>
-							<AnimatePresence>
-								{!unMount && (
-									<>
-										<motion.div
-											initial={{ opacity: 0, x: -50 }}
-											transition={{ duration: 1 }}
-											animate={{ opacity: 0.7, x: 0 }}
-											exit={{ opacity: 0 }}
-											className='currentBalance h-1/2 text-3xl md:text-6xl flex flex-col justify-center items-center text-black whitespace-nowrap'>
-											₹ {CurrentBalance.toLocaleString()}
-											<p className='text-base md:text-lg pb-4 md:pt-4 md:pb-0 text-center'>
-												Current Balance
-											</p>
-										</motion.div>
-										<motion.div
-											initial={{ opacity: 0, x: 50 }}
-											transition={{ duration: 1 }}
-											animate={{ opacity: 1, x: 0 }}
-											exit={{ opacity: 0 }}
-											className='updatedBalance h-1/2 text-3xl md:text-6xl flex flex-col justify-center items-center text-green whitespace-nowrap '>
-											<AnimatedNumber
-												value={UpdatedBalance}
-												formatValue={formatValue}
-												duration={250}
-											/>
-											<p className='text-base md:text-lg pb-4 md:pt-4 md:pb-0 text-center'>
-												After Adding
-											</p>
-										</motion.div>
-									</>
-								)}
-							</AnimatePresence>
+							<motion.div
+								initial={{ opacity: 0, x: -50 }}
+								transition={{ duration: 1 }}
+								animate={{ opacity: 0.7, x: 0 }}
+								exit={{ opacity: 0 }}
+								className='currentBalance h-1/2 text-3xl md:text-6xl flex flex-col justify-center items-center text-black whitespace-nowrap'>
+								₹ {CurrentBalance.toLocaleString()}
+								<p className='text-base md:text-lg pb-4 md:pt-4 md:pb-0 text-center'>
+									Current Balance
+								</p>
+							</motion.div>
+							<motion.div
+								initial={{ opacity: 0, x: 50 }}
+								transition={{ duration: 1 }}
+								animate={{ opacity: 1, x: 0 }}
+								exit={{ opacity: 0 }}
+								className='updatedBalance h-1/2 text-3xl md:text-6xl flex flex-col justify-center items-center text-green whitespace-nowrap '>
+								<AnimatedNumber
+									value={UpdatedBalance}
+									formatValue={formatValue}
+									duration={250}
+								/>
+								<p className='text-base md:text-lg pb-4 md:pt-4 md:pb-0 text-center'>
+									After Adding
+								</p>
+							</motion.div>
 						</div>
 						<div className=' w-full md:w-1/2 px-0 py-3 md:px-16 h-full  '>
 							<div className=' bg-image border h-full lg:w-11/12  flex flex-col text-black rounded-md '>

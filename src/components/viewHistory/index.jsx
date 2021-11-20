@@ -25,7 +25,7 @@ const ViewHistory = () => {
 				},
 			})
 			.then((res) => {
-				console.log(res.data.TransactionHistory);
+				
 				setTransactionHistory(
 					res.data.TransactionHistory.sort(function (a, b) {
 						return new Date(b.date) - new Date(a.date);
@@ -34,7 +34,7 @@ const ViewHistory = () => {
 				setisLoading(false);
 			})
 			.catch((err) => {
-				console.log(TransactionHistory);
+			
 
 				console.log(err);
 				setisLoading(false);
@@ -72,7 +72,7 @@ const ViewHistory = () => {
 										chart ? '' : 'border-b-2'
 									}`}
 									onClick={() => {
-										console.log('Tabular clicke');
+										
 										setchart(false);
 									}}>
 									Tabular

@@ -25,7 +25,7 @@ const Chart = ({ transactions }) => {
 		setdatasetForSpent(arr);
 	}, []);
 
-	console.log(datasetForSpent);
+	
 	const date = new Date();
 	const today = date.getUTCDate();
 	const labels = [];

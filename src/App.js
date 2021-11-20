@@ -15,7 +15,7 @@ import NotFound from "./components/NotFound/NotFound";
 
 const App = () => {
   const [isLogged, setisLogged] = useState(localStorage.getItem('isLogged'))
-  console.log(isLogged)
+  
   const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route
       {...rest}

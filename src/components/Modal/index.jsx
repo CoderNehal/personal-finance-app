@@ -6,7 +6,7 @@ import axios from 'axios';
 
 // import ReactToPrint from 'react-to-print';
 const Modal = ({ data, onShowModalChanged }) => {
-	console.log(data);
+
 	const HandlePrintRecipt = async () => {
 		// axios
 		// 	.post(

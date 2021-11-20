@@ -5,11 +5,10 @@ import './Navbar.scss';
 
 const Navbar = () => {
 	const [Logged, setLogged] = useState(localStorage.getItem('isLogged'));
+	const [Checked, setChecked] = useState(false);
 	const Location = useLocation();
 	useEffect(() => {
-		console.log(Logged);
 		setLogged(localStorage.getItem('isLogged'));
-		console.log('Navbar rendered');
 	}, [Location]);
 	return (
 		<nav className='nav w-screen bg-secondary flex flex-wrap items-center justify-between px-6 md:px-16 py-4 border-b-2 border-gray-400  shadow-md'>
@@ -29,9 +28,15 @@ const Navbar = () => {
 				<span className='font-semibold text-xl tracking-tight'>EveryRupee</span>
 			</div>
 
-			<input class='menu-btn hidden' type='checkbox' id='menu-btn' />
+			<input
+				className='menu-btn hidden'
+				type='checkbox'
+				id='menu-btn'
+				checked={Checked}
+				onChange={() => setChecked(!Checked)}
+			/>
 			<label
-				class='menu-icon  block cursor-pointer md:hidden px-2 py-4 relative select-none'
+				className='menu-icon  block cursor-pointer md:hidden px-2 py-4 relative select-none'
 				htmlFor='menu-btn'>
 				<svg
 					xmlns='http://www.w3.org/2000/svg'
@@ -49,7 +54,11 @@ const Navbar = () => {
 			</label>
 
 			<ul className='menu border-b md:border-none flex justify-end list-reset m-0 w-full md:w-auto'>
-				<li className='border-t md:border-none'>
+				<li
+					className='border-t md:border-none'
+					onClick={() => {
+						setChecked(false);
+					}}>
 					<NavLink
 						to='/home'
 						className='block md:inline-block px-4 py-3   text-grey-darkest hover:text-grey-darker'>
@@ -57,7 +66,11 @@ const Navbar = () => {
 					</NavLink>
 				</li>
 
-				<li className='border-t md:border-none'>
+				<li
+					className='border-t md:border-none'
+					onClick={() => {
+						setChecked(false);
+					}}>
 					<NavLink
 						to='/about'
 						className='block md:inline-block px-4 py-3 text-grey-darkest hover:text-grey-darker'>
@@ -66,7 +79,11 @@ const Navbar = () => {
 				</li>
 
 				{Logged == 'true' ? (
-					<li className='border-t md:border-none'>
+					<li
+						className='border-t md:border-none'
+						onClick={() => {
+							setChecked(false);
+						}}>
 						<button
 							className='block md:inline-block  md:px-7 ml-3 md:ml-5 py-1 my-2 md:mt-2  text-red hover:text-grey-darker border-gray-400 md:border md:text-center rounded-sm'
 							onClick={() => {
@@ -80,7 +97,11 @@ const Navbar = () => {
 					</li>
 				) : (
 					<>
-						<li className='border-t md:border-none'>
+						<li
+							className='border-t md:border-none'
+							onClick={() => {
+								setChecked(false);
+							}}>
 							<NavLink
 								to='/login'
 								className='block md:inline-block px-4 py-3 text-grey-darkest hover:text-grey-darker'>
@@ -88,7 +109,11 @@ const Navbar = () => {
 							</NavLink>
 						</li>
 
-						<li className='border-t md:border-none'>
+						<li
+							className='border-t md:border-none'
+							onClick={() => {
+								setChecked(false);
+							}}>
 							<NavLink
 								to='/signup'
 								className='block md:inline-block px-4 py-3 text-grey-darkest hover:text-grey-darker'>

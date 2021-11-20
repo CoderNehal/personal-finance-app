@@ -14,7 +14,7 @@ const Home = () => {
 	useEffect(() => {
 		setisLoading(true);
 
-		console.log(process.env.REACT_APP_BASE_URL);
+	
 
 		axios
 			.post(
@@ -29,7 +29,7 @@ const Home = () => {
 				}
 			)
 			.then((res) => {
-				console.log(res);
+			
 				const { Balance, LastMonthSpent, LastYearSpent } = res.data.userInfo;
 				setBalance(Balance);
 				setSpentLastMonth(LastMonthSpent);
@@ -161,7 +161,7 @@ const Home = () => {
 								duration: 1.3,
 							}}>
 							<Link
-								className='btn bg-yellow-300 flex justify-content-center items-center mt-4 md:mt-0 px-20 md:px-36 py-3 md:py-4  lg:text-xl  rounded-sm md:rounded   sm:w-auto mx-auto border-gray-300 whitespace-nowrap'
+								className='btn bg-yellow-300 flex justify-content-center items-center mt-4 md:mt-0 px-cs md:px-36 py-3 md:py-4  lg:text-xl  rounded-sm md:rounded   sm:w-auto mx-auto border-gray-300 whitespace-nowrap'
 								to='/view-history'>
 								<svg
 									xmlns='http://www.w3.org/2000/svg'

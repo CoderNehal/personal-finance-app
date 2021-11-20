@@ -71,7 +71,6 @@ const SpendMoney = () => {
 				}
 			)
 			.then((res) => {
-				console.log(res);
 				const { Balance } = res.data.userInfo;
 				setisLoading(false);
 				setCurrentBalance(Balance);
@@ -83,10 +82,7 @@ const SpendMoney = () => {
 			});
 	}, []);
 	const handleIncomeSource = (classList, id) => {
-		console.log('This is true');
 		if (id == 'Other') {
-			console.log('This is In Incomr');
-
 			setReasonToSpend('Other');
 			setother(true);
 		} else {
@@ -94,7 +90,6 @@ const SpendMoney = () => {
 			document.getElementById('Transport').classList.remove('border-red');
 			document.getElementById('Other').classList.remove('border-red');
 			classList.add('border-red');
-			console.log(id);
 
 			setReasonToSpend(id);
 		}
@@ -118,7 +113,6 @@ const SpendMoney = () => {
 				}
 			)
 			.then((res) => {
-				console.log(res.data);
 				setShowAlert(true);
 			})
 			.catch((err) => {
@@ -136,29 +130,11 @@ const SpendMoney = () => {
 			} else {
 				setUpdatedBalance(updatedAmmount); // async
 				UpdateData(AmoutToSpend, ReasonToSpend, otherReason);
-				console.log(
-					'Balance:',
-					CurrentBalance,
-					'Update:',
-					UpdatedBalance,
-					'Total amount Added:',
-					AmoutToSpend,
-					'Mode of payment:',
-					ReasonToSpend
-				);
 			}
 		} else {
 			if (AmoutToSpend) {
 				UpdateData(AmoutToSpend, otherSelectedOption, otherReason);
 				setUpdatedBalance(updatedAmmount);
-				console.log(
-					'Mode :',
-					ReasonToSpend,
-					'Reason :',
-					otherSelectedOption,
-					'Total fookin amount spoend :',
-					AmoutToSpend
-				);
 			} else if (!otherSelectedOption) {
 				alert('Select fookin Category');
 			} else {
@@ -174,7 +150,7 @@ const SpendMoney = () => {
 				<div className='SpendMoneyContainer p-8  relative'>
 					<div className='flex flex-col md:flex-row justify-between h-full items-center  '>
 						{/*Back Button */}
-						<div className='bckbtn h-full'>
+						<div className='bckbtn h-full w-full md:w-auto'>
 							<button
 								className='   text-black  cursor-pointer w-12 h-12 top-0 left-0'
 								onClick={() => {
@@ -380,7 +356,7 @@ const SpendMoney = () => {
 												variants={container}
 												initial='hidden'
 												animate='visible'
-												className='MoneyOptions grid grid-cols-2 gap-3  sm:flex sm:justify-between sm:items-center sm:w-3/4 h-60 lg:h-1/2 flex-wrap px-10'>
+												className='MoneyOptions grid grid-cols-2 gap-3  sm:flex sm:justify-between sm:items-center sm:w-3/4 h-60 lg:h-1/2 flex-wrap px-0 md:px-8'>
 												<motion.div
 													variants={item}
 													className='py-1 px-3 cursor-pointer rounded-md my-auto text-center border-2 text-lg border-red  text-primary hover:bg-red hover:text-white transition-all duration-400 ease-in-out'

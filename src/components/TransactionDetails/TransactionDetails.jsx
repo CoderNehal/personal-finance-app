@@ -10,7 +10,7 @@ const TransactionDetails = () => {
 		alert('Recipt downloaded successfullyy!');
 	};
 	useEffect(() => {
-		console.log(Location);
+		
 		setdata(Location.query);
 	}, []);
 	return (

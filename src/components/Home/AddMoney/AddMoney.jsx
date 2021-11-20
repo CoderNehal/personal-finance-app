@@ -67,7 +67,6 @@ const AddMoney = () => {
 				}
 			)
 			.then((res) => {
-				console.log(res);
 				const { Balance } = res.data.userInfo;
 				setisLoading(false);
 				setCurrentBalance(Balance);
@@ -83,7 +82,7 @@ const AddMoney = () => {
 		document.getElementById('Passive').classList.remove('border-primary');
 		document.getElementById('Other').classList.remove('border-primary');
 		classList.add('border-primary');
-		console.log(id);
+
 		setModeOFIncome(id);
 	};
 	const formatValue = (value) => `₹ ${Number(value).toLocaleString()}`;
@@ -113,22 +112,11 @@ const AddMoney = () => {
 					}
 				)
 				.then((res) => {
-					console.log(res.data);
 					setShowAlert(true);
 				})
 				.catch((err) => {
 					console.log(err);
 				});
-			console.log(
-				'Balance:',
-				CurrentBalance,
-				'Update:',
-				UpdatedBalance,
-				'Total amount Added:',
-				AmoutToAdd,
-				'Mode of payment:',
-				ModeOFIncome
-			);
 		}
 	};
 	return (
@@ -139,9 +127,9 @@ const AddMoney = () => {
 				<div className='AddMoneyContainer p-8  relative'>
 					<div className='flex flex-col md:flex-row justify-between h-full items-center  '>
 						{/*Back Button */}
-						<div className='bckbtn h-full'>
+						<div className='bckbtn h-full w-full md:w-auto '>
 							<button
-								className='   text-black  cursor-pointer w-12 h-12 top-0 left-0'
+								className='   text-black  cursor-pointer w-12 h-12 '
 								onClick={() => {
 									history.goBack();
 								}}>
@@ -211,7 +199,7 @@ const AddMoney = () => {
 										variants={container}
 										initial='hidden'
 										animate='visible'
-										className='MoneyOptions grid grid-cols-2 gap-3  sm:flex sm:justify-between sm:items-center sm:w-3/4 h-auto lg:h-1/2 flex-wrap px-0 md:px-10'>
+										className='MoneyOptions grid grid-cols-2 gap-3  sm:flex sm:justify-between sm:items-center sm:w-3/4 h-auto lg:h-1/2 flex-wrap px-0 md:px-8'>
 										<motion.div
 											variants={item}
 											className='py-1 px-3 cursor-pointer rounded-md my-auto text-center border-2 text-lg  border-green  text-primary hover:bg-green hover:text-white transition-all duration-400 ease-in-out'

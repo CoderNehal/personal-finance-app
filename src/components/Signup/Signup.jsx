@@ -4,7 +4,7 @@ import cookie from 'js-cookie';
 import EmailValidator from 'email-validator';
 // import './Signup.scss';
 import Auth from '../Auth/Auth';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import signup from '../../images/Signup.jpg';
 import Spinner from '../Loading';
@@ -45,7 +45,6 @@ const Signup = () => {
 					}
 				)
 				.then((res) => {
-					console.log(res);
 					cookie.set('jwt', res.data.token);
 					cookie.set('userId', res.data.user.userId, {
 						expires: 1,
@@ -78,49 +77,53 @@ const Signup = () => {
 					<div className='text-black hidden  md:flex justify-end md:items-center '>
 						<img src={signup} alt='' className='' />
 					</div>
-					<div className=' col-span-2 md:col-span-1 w-full max-w-md my-auto  md:rounded-lg md:border border-primaryBorder shadow-default py-6 px-12  md:shadow-md'>
+					<div className=' col-span-2 md:col-span-1 w-full max-w-md my-auto  md:rounded-lg md:border border-primaryBorder shadow-default py-6 px-5 md:px-12  md:shadow-md'>
 						<h1 className='text-2xl font-medium text-primary mt-12 mb-12 text-center'>
-							Create account
+							Create an account
 						</h1>
+						<form onSubmit={handleSignup}>
+							<div>
+								<label className='text-primary' htmlFor='email'>
+									Email
+								</label>
+								<input
+									type='email'
+									className={`w-full p-3 mb-4 mt-2
+								sm:p-2 text-primary border rounded-md outline-none text-base  transition duration-150 ease-in-out `}
+									id='email'
+									value={email}
+									onChange={(e) => setemail(e.target.value)}
+									placeholder='Your Email'
+								/>
+							</div>
+							<p className='text-red text-sm -mt-3 mb-3'>{Emailerror}</p>
+							<div>
+								<label className='text-primary' htmlFor='password'>
+									Password
+								</label>
+								<input
+									type='password'
+									className={`w-full p-3 mb-4 mt-2
+								sm:p-2 text-primary border rounded-md outline-none text-base   transition duration-150 ease-in-out `}
+									id='password'
+									value={password}
+									onChange={(e) => setpassword(e.target.value)}
+									placeholder='Your Password'
+								/>
+							</div>
+							<p className='text-red text-sm -mt-3 mb-3'>{passwordError}</p>
 
-						<div>
-							<label className='text-primary' htmlFor='email'>
-								Email
-							</label>
-							<input
-								type='email'
-								className={`w-full p-3 mb-4 mt-2
-						 sm:p-2 text-primary border rounded-md outline-none text-base  transition duration-150 ease-in-out `}
-								id='email'
-								value={email}
-								onChange={(e) => setemail(e.target.value)}
-								placeholder='Your Email'
-							/>
-						</div>
-						<p className='text-red text-sm -mt-3 mb-3'>{Emailerror}</p>
-						<div>
-							<label className='text-primary' htmlFor='password'>
-								Password
-							</label>
-							<input
-								type='password'
-								className={`w-full p-3 mb-4 mt-2
-						 sm:p-2 text-primary border rounded-md outline-none text-base   transition duration-150 ease-in-out `}
-								id='password'
-								value={password}
-								onChange={(e) => setpassword(e.target.value)}
-								placeholder='Your Password'
-							/>
-						</div>
-						<p className='text-red text-sm -mt-3 mb-3'>{passwordError}</p>
-
-						<div className='flex justify-center items-center mt-6 mb-12'>
-							<button
-								className={`bg-green py-2 px-8 sm:px-4 text-base  text-white rounded border border-green focus:outline-none focus:border-green-dark`}
-								onClick={handleSignup}>
-								Sign up
-							</button>
-						</div>
+							<div className='flex justify-center items-center mt-6 mb-6'>
+								<button
+									className={`bg-green py-2 px-8 sm:px-4 text-base  text-white rounded border border-green focus:outline-none focus:border-green-dark`}
+									type='submit'>
+									Sign up
+								</button>
+							</div>
+							<p className=' text-primary text-center mb-6'>
+								Already user? <Link className='underline' to='/login'> Login here</Link>
+							</p>
+						</form>
 						{ShowAlert ? (
 							<motion.div
 								initial={{ x: '100vw' }}

@@ -1,9 +1,9 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import cookie from 'js-cookie';
 // import './Login.scss';
 import Auth from '../Auth/Auth';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import login from '../../images/login.jpg';
 import Spinner from '../Loading';
@@ -15,6 +15,7 @@ const Login = () => {
 	const [Emailerror, setEmailerror] = useState('');
 	const [Passworderror, setPassworderror] = useState('');
 	const [ShowAlert, setShowAlert] = useState(false);
+	useEffect(() => {}, []);
 	const handleLogin = () => {
 		setShowAlert(false);
 		setEmailerror('');
@@ -80,50 +81,54 @@ const Login = () => {
 					<div className='text-black hidden  md:flex justify-end md:items-center '>
 						<img src={login} alt='' className='' />
 					</div>
-					<div className=' col-span-2 md:col-span-1 w-full max-w-md my-auto  md:rounded-lg md:border  border-primaryBorder shadow-default py-6 px-12 md:shadow-md'>
+					<div className=' col-span-2 md:col-span-1 w-full max-w-md my-auto  md:rounded-lg md:border  border-primaryBorder shadow-default py-6 px-5 md:px-12 md:shadow-md'>
 						<h1 className='text-2xl font-medium text-primary mt-12 mb-12 text-center'>
 							Log in to your account
 						</h1>
-
-						<div>
-							<label className='text-primary ' htmlFor='email'>
-								Email
-							</label>
-							<input
-								type='email'
-								className={`w-full p-3 mb-4 mt-2
+						<form onSubmit={handleLogin}>
+							<div>
+								<label className='text-primary ' htmlFor='email'>
+									Email
+								</label>
+								<input
+									type='email'
+									className={`w-full p-3 mb-4 mt-2
 						 sm:p-2 text-primary border rounded-md outline-none text-base  transition duration-150 ease-in-out`}
-								id='email'
-								value={email}
-								onChange={(e) => setemail(e.target.value)}
-								placeholder='Your Email'
-							/>
-						</div>
-						<p className='text-red text-sm -mt-3 mb-3'>{Emailerror}</p>
+									id='email'
+									value={email}
+									onChange={(e) => setemail(e.target.value)}
+									placeholder='Your Email'
+								/>
+							</div>
+							<p className='text-red text-sm -mt-3 mb-3'>{Emailerror}</p>
 
-						<div>
-							<label className='text-primary ' htmlFor='password'>
-								Password
-							</label>
-							<input
-								type='password'
-								className={`w-full p-3 mb-4 mt-2
+							<div>
+								<label className='text-primary ' htmlFor='password'>
+									Password
+								</label>
+								<input
+									type='password'
+									className={`w-full p-3 mb-4 mt-2
 						 sm:p-2 text-primary border rounded-md outline-none text-base   transition duration-150 ease-in-out`}
-								id='password'
-								value={password}
-								onChange={(e) => setpassword(e.target.value)}
-								placeholder='Your Password'
-							/>
-						</div>
-						<p className='text-red text-sm -mt-3 mb-3'>{Passworderror}</p>
+									id='password'
+									value={password}
+									onChange={(e) => setpassword(e.target.value)}
+									placeholder='Your Password'
+								/>
+							</div>
+							<p className='text-red text-sm -mt-3 mb-3'>{Passworderror}</p>
 
-						<div className='flex justify-center items-center mt-6 mb-12'>
-							<button
-								className={`bg-green py-2 px-8 sm:px-4 text-base  text-white rounded border border-green focus:outline-none focus:border-green-dark`}
-								onClick={handleLogin}>
-								Login
-							</button>
-						</div>
+							<div className='flex justify-center items-center mt-6 mb-6'>
+								<button
+									className={`bg-green py-2 px-8 sm:px-4 text-base  text-white rounded border border-green focus:outline-none focus:border-green-dark`}
+									type='submit'>
+									Login
+								</button>
+							</div>
+							<p className='text-primary text-center mb-6'>
+								Not an user? <Link className='underline' to='/signup'> Create here</Link>
+							</p>
+						</form>
 						{ShowAlert ? (
 							<motion.div
 								initial={{ x: '100vw' }}

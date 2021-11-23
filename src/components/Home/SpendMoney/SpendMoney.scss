@@ -6,18 +6,23 @@
 	height: auto;
 	min-height: 86.7vh;
 	background-size: contain;
-
+	padding-left: -10rem;
+	padding-right: -10rem;
 	@media (min-width: 768px) {
 		height: 40rem;
 		background-size: auto;
+		padding: 2rem;
 	}
 }
 .bg-blur {
 	background: rgba(255, 255, 255, 0.25);
-	box-shadow: 0 3px 12px 0 #1504857c;
+
 	backdrop-filter: blur(4px);
 	-webkit-backdrop-filter: blur(4px);
 	border-radius: 10px;
+	@media (min-width: 768px) {
+		box-shadow: 0 3px 12px 0 #1504857c;
+	}
 }
 /* Chrome, Safari, Edge, Opera */
 /* Firefox */
@@ -43,8 +48,8 @@ input[type='number'] {
 	}
 }
 
-input[type='text']{
-	&::placeholder{
+input[type='text'] {
+	&::placeholder {
 		font-style: italic;
 		color: rgba($color: #000, $alpha: 0.5);
 	}

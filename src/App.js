@@ -13,9 +13,11 @@ import { useState } from "react";
 import NotFound from "./components/NotFound/NotFound";
 
 
+
+
 const App = () => {
   const [isLogged, setisLogged] = useState(localStorage.getItem('isLogged'))
-  
+
   const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route
       {...rest}
@@ -32,12 +34,13 @@ const App = () => {
       }
     />
   );
+  
 
   return (
     <Router>
 
-      <div className='w-screen bg-white h-screen m-0 text-white overflow-x-hidden '>
-        <Navbar isLogged={Auth.getAuth()} />
+      <div id='app' className={`w-screen bg-white h-screen m-0 text-white overflow-x-hidden ${localStorage.getItem('darkMode') == 'true' ? 'dark' : ''} `}>
+        <Navbar isLogged={Auth.getAuth()}   />
         <Switch>
           <PrivateRoute path='/home' exact component={Home} />
           <PrivateRoute path="/about" exact component={About} />

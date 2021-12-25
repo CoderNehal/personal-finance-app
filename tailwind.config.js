@@ -8,12 +8,18 @@ module.exports = {
         primary: '#150485',
         secondary: '#590995',
         red: '#C62A88',
-        green: '#03C4A1'
+        green: '#03C4A1',
+        darkModeBlack: '#202020',
+        darkModeText: 'rgba(255,255,255,0.92)',
+        darkModePrimary: 'rgba(21, 40, 203, 1)'
       },
       padding: {
-       
-        cs:'5.5rem'
-       }
+
+        cs: '5.5rem'
+      },
+      margin: {
+        120: '-50rem'
+      }
     },
   },
   variants: {

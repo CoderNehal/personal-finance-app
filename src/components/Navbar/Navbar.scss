@@ -1,5 +1,5 @@
 .active {
-	color: #C62A88;
+	color: #c62a88;
 }
 
 @media (max-width: 767px) {
@@ -54,6 +54,64 @@
 					}
 				}
 			}
+		}
+	}
+}
+.toggle-label {
+	position: relative;
+
+	&:before {
+		position: absolute;
+		top: 0.125rem;
+		left: 0.125rem;
+
+		display: block;
+		content: '';
+
+		width: 1.25rem;
+		height: 1.25rem;
+
+		border-radius: 9999%;
+
+		background-color: white;
+		background-position: center;
+		background-repeat: no-repeat;
+
+		background-size: 40%;
+
+		transition: transform 0.15s cubic-bezier(0, 0, 0.2, 1);
+
+		transform: translateX(0);
+
+		box-shadow: 2px 0px 22px 1px rgba(0, 0, 0, 0.3);
+		
+	}
+}
+
+.toggle-checkbox:checked + .toggle-label:before {
+	transform: translateX(1.5rem);
+}
+
+.toggle {
+	&.slim {
+		.toggle-label:before {
+			top: -0.15rem;
+
+			left: 0;
+		}
+
+		.toggle-checkbox:checked + .toggle-label:before {
+			transform: translateX(1.75rem);
+		}
+	}
+
+	&.colour {
+		.toggle-label {
+			background-color: #fff;
+		}
+
+		.toggle-checkbox:checked + .toggle-label {
+			background-color: #e6e6e6;
 		}
 	}
 }

@@ -6,10 +6,12 @@ import './Navbar.scss';
 const Navbar = () => {
 	const [Logged, setLogged] = useState(localStorage.getItem('isLogged'));
 	const [Checked, setChecked] = useState(false);
+	
 	const Location = useLocation();
 	useEffect(() => {
 		setLogged(localStorage.getItem('isLogged'));
 	}, [Location]);
+
 	return (
 		<nav className='nav w-screen bg-secondary flex flex-wrap items-center justify-between px-6 md:px-16 py-4 border-b-2 border-gray-400  shadow-md'>
 			<div className='flex flex-no-shrink items-center mr-6 py-3 text-grey-darkest'>
@@ -27,7 +29,10 @@ const Navbar = () => {
 				</svg>
 				<span className='font-semibold text-xl tracking-tight'>EveryRupee</span>
 			</div>
+			{/* dark Mode */}
+			
 
+			{/* Hamburger */}
 			<input
 				className='menu-btn hidden'
 				type='checkbox'
@@ -52,7 +57,7 @@ const Navbar = () => {
 					/>
 				</svg>
 			</label>
-
+			{/* nav */}
 			<ul className='menu border-b md:border-none flex justify-end list-reset m-0 w-full md:w-auto'>
 				<li
 					className='border-t md:border-none'

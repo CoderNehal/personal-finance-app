@@ -1,5 +1,5 @@
 .AddMoneyContainer {
-	background: url('../../../images/addMoneyBg.jpg');
+	background: url('../../../images/addMoneyBg1.png');
 
 	background-position: center;
 	background-repeat: no-repeat;
@@ -23,7 +23,11 @@
 	@media (min-width: 768px) {
 		box-shadow: 0 3px 12px 0 #1504857c;
 	}
+	@media (prefers-color-scheme: dark) {
+		box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+	}
 }
+
 /* Chrome, Safari, Edge, Opera */
 /* Firefox */
 input {

@@ -14,8 +14,6 @@ const Home = () => {
 	useEffect(() => {
 		setisLoading(true);
 
-	
-
 		axios
 			.post(
 				process.env.REACT_APP_BASE_URL + 'get-user',
@@ -29,7 +27,6 @@ const Home = () => {
 				}
 			)
 			.then((res) => {
-			
 				const { Balance, LastMonthSpent, LastYearSpent } = res.data.userInfo;
 				setBalance(Balance);
 				setSpentLastMonth(LastMonthSpent);
@@ -47,18 +44,21 @@ const Home = () => {
 			) : (
 				<div className='HomeContainer w-screen   cursor-default  relative pt-16 '>
 					{
-						<motion.div initial={{ width: 0 }}
+						<motion.div
+							initial={{ width: 0 }}
 							animate={{ width: '91.666667%' }}
 							transition={{ duration: 0.5 }}
-							className='currentAmountBox  rounded-md mx-auto w-11/12 border flex flex-col justify-between items-center font-semibold  bg-white py-3 border-gray-500  '>
+							className='currentAmountBox  rounded-md mx-auto w-11/12 border flex flex-col justify-between items-center font-semibold  bg-white dark:bg-darkModeBlack py-3 border-gray-500  '>
 							<div className='BlankDiv'></div>
-							<motion.div initial={{ y: -30, opacity: 0 }}
+							<motion.div
+								initial={{ y: -30, opacity: 0 }}
 								animate={{ y: 0, opacity: 1 }}
 								transition={{ duration: 0.7, delay: 0.3 }}>
 								<div className='amount text-4xl  overflow-hidden   md:text-8xl  text-green px-5 md:px-16'>
 									₹ {Balance.toLocaleString()}
 								</div>
-								<motion.hr initial={{ width: 0 }}
+								<motion.hr
+									initial={{ width: 0 }}
 									animate={{ width: '100%' }}
 									transition={{ duration: 0.5, delay: 0.7 }}
 									style={{ height: '1.5px', background: '#eeeeee' }}
@@ -68,13 +68,15 @@ const Home = () => {
 								</p>
 							</motion.div>
 							<div className='flex justify-between w-full md:w-3/4'>
-								<motion.div initial={{ y: 30, opacity: 0 }}
+								<motion.div
+									initial={{ y: 30, opacity: 0 }}
 									animate={{ y: 0, opacity: 1 }}
 									transition={{ duration: 0.7, delay: 1.3 }}
-									className='lastMonth text-primary text-md md:text-xl text-center p-4'>
+									className='lastMonth text-primary dark:text-darkModePrimary text-md md:text-xl text-center p-4'>
 									<p className='  px-1 md:px-8'>Total Spent Last Month</p>
 									<motion.hr
-										className='mb-2' initial={{ width: 0 }}
+										className='mb-2'
+										initial={{ width: 0 }}
 										animate={{ width: '100%' }}
 										transition={{ duration: 0.3, delay: 2 }}
 										style={{
@@ -85,13 +87,15 @@ const Home = () => {
 									₹{SpentLastMonth.toLocaleString()}
 								</motion.div>
 
-								<motion.div initial={{ y: 30, opacity: 0 }}
+								<motion.div
+									initial={{ y: 30, opacity: 0 }}
 									animate={{ y: 0, opacity: 1 }}
 									transition={{ duration: 0.7, delay: 1.3 }}
 									className='totalThisYear text-md md:text-xl text-center p-4 '>
 									<p className=' px-1 md:px-8'>Total Spent This Year</p>
 									<motion.hr
-										className='mb-2' initial={{ width: 0 }}
+										className='mb-2'
+										initial={{ width: 0 }}
 										animate={{ width: '100%' }}
 										transition={{ duration: 0.3, delay: 2 }}
 										style={{
@@ -106,13 +110,14 @@ const Home = () => {
 					}
 
 					<div className='buttons flex flex-col md:px-12 lg:px-0 lg:flex-row justify-between items-center  w-11/12 mx-auto mt-4 text-white h-full md:h-52  '>
-						<motion.div initial={{ x: '-100vw' }}
+						<motion.div
+							initial={{ x: '-100vw' }}
 							animate={{ x: 0 }}
 							transition={{
 								duration: 0.7,
 							}}>
 							<Link
-								className='btn bg-green  flex justify-content-center items-center min-w-full px-cs  md:px-36 py-3 md:py-4  lg:text-xl  rounded-sm md:rounded   sm:w-auto mx-auto border-gray-300  whitespace-nowrap'
+								className='btn bg-green  flex justify-content-center items-center min-w-full px-cs  md:px-36 py-3 md:py-4  lg:text-xl  rounded-sm md:rounded   sm:w-auto mx-auto border-gray-300  whitespace-nowrap dark:text-darkModeText'
 								to='/add-money'>
 								<svg
 									xmlns='http://www.w3.org/2000/svg'
@@ -130,13 +135,14 @@ const Home = () => {
 								<span className='ml-6 md:ml-3 '>Add Money</span>
 							</Link>
 						</motion.div>
-						<motion.div initial={{ x: '-100vw' }}
+						<motion.div
+							initial={{ x: '-100vw' }}
 							animate={{ x: 0 }}
 							transition={{
 								duration: 1,
 							}}>
 							<Link
-								className='btn bg-red flex justify-content-center items-center mt-4 md:mt-0 px-20 md:px-36 py-3 md:py-4  lg:text-xl rounded-sm md:rounded sm:w-auto mx-auto border-gray-300 whitespace-nowrap'
+								className='btn bg-red flex justify-content-center items-center mt-4 md:mt-0 px-20 md:px-36 py-3 md:py-4  lg:text-xl rounded-sm md:rounded sm:w-auto mx-auto border-gray-300 whitespace-nowrap dark:text-darkModeText'
 								to='/spend-money'>
 								<svg
 									xmlns='http://www.w3.org/2000/svg'
@@ -155,13 +161,14 @@ const Home = () => {
 								<span className='ml-6 md:ml-3'>Spend Money</span>
 							</Link>
 						</motion.div>
-						<motion.div initial={{ x: '-100vw' }}
+						<motion.div
+							initial={{ x: '-100vw' }}
 							animate={{ x: 0 }}
 							transition={{
 								duration: 1.3,
 							}}>
 							<Link
-								className='btn bg-yellow-300 flex justify-content-center items-center mt-4 md:mt-0 px-cs md:px-36 py-3 md:py-4  lg:text-xl  rounded-sm md:rounded   sm:w-auto mx-auto border-gray-300 whitespace-nowrap'
+								className='btn dark:bg-secondary bg-yellow-300 flex justify-content-center items-center mt-4 md:mt-0 px-cs md:px-36 py-3 md:py-4  lg:text-xl  rounded-sm md:rounded   sm:w-auto mx-auto border-gray-300 whitespace-nowrap dark:text-darkModeText'
 								to='/view-history'>
 								<svg
 									xmlns='http://www.w3.org/2000/svg'

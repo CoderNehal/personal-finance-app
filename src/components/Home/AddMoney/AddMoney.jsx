@@ -197,7 +197,7 @@ const AddMoney = () => {
 								</motion.div>
 							</div>
 							<div className=' w-full md:w-1/2 px-0 py-3 md:px-16 h-full  '>
-								<div className=' bg-image  h-full lg:w-11/12  flex flex-col text-black rounded-md '>
+								<div className=' bg-image   h-full lg:w-11/12  flex flex-col text-black rounded-md '>
 									<div className='upperPart h-1/2 flex flex-col justify-between items-center py-5'>
 										<div className='text-green text-center text-lg lg:text-xl'>
 											How much would you like to add?
@@ -221,7 +221,7 @@ const AddMoney = () => {
 											variants={container}
 											initial='hidden'
 											animate='visible'
-											className='MoneyOptions grid grid-cols-2 gap-3  sm:flex sm:justify-between sm:items-center sm:w-3/4 h-auto lg:h-1/2 flex-wrap px-0 md:px-8'>
+											className='MoneyOptions grid grid-cols-2 gap-3  sm:flex sm:justify-between sm:items-center sm:w-3/4 h-auto lg:h-1/2 flex-wrap px-0 md:px-8 npm s'>
 											<motion.div
 												variants={item}
 												className='py-1 px-3 cursor-pointer rounded-md my-auto text-center border-2 text-lg  border-green  text-primary hover:bg-green hover:text-white transition-all duration-400 ease-in-out'

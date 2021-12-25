@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import credit from '../../../images/credit.png';
-import debit from '../../../images/debit.png';
+import credit from '../../../images/credit1.png';
+import debit from '../../../images/debit1.png';
 
 import { motion } from 'framer-motion';
 

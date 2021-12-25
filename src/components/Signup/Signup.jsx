@@ -6,7 +6,7 @@ import EmailValidator from 'email-validator';
 import Auth from '../Auth/Auth';
 import { Link, useHistory } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import signup from '../../images/Signup.jpg';
+import signup from '../../images/Signup1.png';
 import Spinner from '../Loading';
 const Signup = () => {
 	const history = useHistory();
@@ -17,7 +17,8 @@ const Signup = () => {
 	const [passwordError, setpasswordError] = useState('');
 	const [Loading, setLoading] = useState(false);
 	const [ShowAlert, setShowAlert] = useState(false);
-	const handleSignup = () => {
+	const handleSignup = (e) => {
+		e.preventDefault();
 		setEmailerror('');
 		setpasswordError('');
 		setShowAlert(false);
@@ -81,7 +82,7 @@ const Signup = () => {
 						<h1 className='text-2xl font-medium text-primary mt-12 mb-12 text-center'>
 							Create an account
 						</h1>
-						<form onSubmit={handleSignup}>
+						<form onSubmit={(e) => handleSignup(e)}>
 							<div>
 								<label className='text-primary' htmlFor='email'>
 									Email

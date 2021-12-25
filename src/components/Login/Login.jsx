@@ -5,7 +5,7 @@ import cookie from 'js-cookie';
 import Auth from '../Auth/Auth';
 import { Link, useHistory } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import login from '../../images/login.jpg';
+import login from '../../images/login1.jpg';
 import Spinner from '../Loading';
 const Login = () => {
 	const history = useHistory();
@@ -15,8 +15,9 @@ const Login = () => {
 	const [Emailerror, setEmailerror] = useState('');
 	const [Passworderror, setPassworderror] = useState('');
 	const [ShowAlert, setShowAlert] = useState(false);
-	useEffect(() => {}, []);
-	const handleLogin = () => {
+	useEffect(() => { }, []);
+	const handleLogin = (e) => {
+		e.preventDefault();
 		setShowAlert(false);
 		setEmailerror('');
 		setPassworderror('');
@@ -85,7 +86,7 @@ const Login = () => {
 						<h1 className='text-2xl font-medium text-primary mt-12 mb-12 text-center'>
 							Log in to your account
 						</h1>
-						<form onSubmit={handleLogin}>
+						<form onSubmit={(e) => handleLogin(e)}>
 							<div>
 								<label className='text-primary ' htmlFor='email'>
 									Email

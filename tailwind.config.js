@@ -15,7 +15,8 @@ module.exports = {
       },
       padding: {
 
-        cs: '5.5rem'
+        cs: '5.5rem',
+        34: '8.5rem'
       },
       margin: {
         120: '-50rem'

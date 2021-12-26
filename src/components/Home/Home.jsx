@@ -54,7 +54,7 @@ const Home = () => {
 								initial={{ y: -30, opacity: 0 }}
 								animate={{ y: 0, opacity: 1 }}
 								transition={{ duration: 0.7, delay: 0.3 }}>
-								<div className='amount text-4xl  overflow-hidden   md:text-8xl  text-green px-5 md:px-16'>
+								<div className='amount text-4xl  overflow-hidden sm:text-5xl md:text-6xl  lg:text-8xl  text-green px-5 md:px-16'>
 									₹ {Balance.toLocaleString()}
 								</div>
 								<motion.hr
@@ -109,7 +109,7 @@ const Home = () => {
 						</motion.div>
 					}
 
-					<div className='buttons flex flex-col md:px-12 lg:px-0 lg:flex-row justify-between items-center  w-11/12 mx-auto mt-4 text-white h-full md:h-52  '>
+					<div className='buttons flex flex-col md:px-12 lg:px-0 2xl:flex-row justify-between items-center  w-11/12 mx-auto mt-4 text-white h-full md:h-52  '>
 						<motion.div
 							initial={{ x: '-100vw' }}
 							animate={{ x: 0 }}
@@ -142,7 +142,7 @@ const Home = () => {
 								duration: 1,
 							}}>
 							<Link
-								className='btn bg-red flex justify-content-center items-center mt-4 md:mt-0 px-20 md:px-36 py-3 md:py-4  lg:text-xl rounded-sm md:rounded sm:w-auto mx-auto border-gray-300 whitespace-nowrap dark:text-darkModeText'
+								className='btn bg-red flex justify-content-center items-center mt-4 md:mt-0 px-20 md:px-34 py-3 md:py-4  lg:text-xl rounded-sm md:rounded sm:w-auto mx-auto border-gray-300 whitespace-nowrap dark:text-darkModeText'
 								to='/spend-money'>
 								<svg
 									xmlns='http://www.w3.org/2000/svg'

@@ -196,8 +196,8 @@ const AddMoney = () => {
 									</p>
 								</motion.div>
 							</div>
-							<div className=' w-full md:w-1/2 px-0 py-3 md:px-16 h-full  '>
-								<div className=' bg-image   h-full lg:w-11/12  flex flex-col text-black rounded-md '>
+							<div className=' w-full md:w-2/3 2xl:w-1/2 px-n2 py-3 2xl:px-16 h-full  '>
+								<div className=' bg-image   h-full  xl:w-11/12 w-full  flex flex-col text-black rounded-md '>
 									<div className='upperPart h-1/2 flex flex-col justify-between items-center py-5'>
 										<div className='text-green text-center text-lg lg:text-xl'>
 											How much would you like to add?
@@ -206,9 +206,8 @@ const AddMoney = () => {
 											<div className='flex justify-center items-center text-primary text-xl'>
 												₹
 												<input
-													className={`bg-transparent border-b-2 w-1/3 text-center ml-4 ${
-														AmoutToAdd > 0 ? 'border-green' : null
-													}`}
+													className={`bg-transparent border-b-2 w-1/3 text-center ml-4 ${AmoutToAdd > 0 ? 'border-green' : null
+														}`}
 													type='number'
 													value={AmoutToAdd}
 													onChange={(e) =>

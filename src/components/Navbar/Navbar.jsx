@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import Auth from '../Auth/Auth';
 import './Navbar.scss';
 
 const Navbar = () => {
 	const [Logged, setLogged] = useState(localStorage.getItem('isLogged'));
 	const [Checked, setChecked] = useState(false);
-	
+
 	const Location = useLocation();
 	useEffect(() => {
 		setLogged(localStorage.getItem('isLogged'));
@@ -14,7 +14,8 @@ const Navbar = () => {
 
 	return (
 		<nav className='nav w-screen bg-secondary flex flex-wrap items-center justify-between px-6 md:px-16 py-4 border-b-2 border-gray-400  shadow-md'>
-			<div className='flex flex-no-shrink items-center mr-6 py-3 text-grey-darkest'>
+
+			<Link to='/' className='flex flex-no-shrink items-center mr-6 py-3 text-grey-darkest '>
 				<svg
 					xmlns='http://www.w3.org/2000/svg'
 					className=' w-7 h-7 mr-3'
@@ -28,9 +29,10 @@ const Navbar = () => {
 					/>
 				</svg>
 				<span className='font-semibold text-xl tracking-tight'>EveryRupee</span>
-			</div>
+			</Link>
+
 			{/* dark Mode */}
-			
+
 
 			{/* Hamburger */}
 			<input

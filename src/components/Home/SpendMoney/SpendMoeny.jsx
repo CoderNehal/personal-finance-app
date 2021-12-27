@@ -222,8 +222,8 @@ const SpendMoney = () => {
 									</p>
 								</motion.div>
 							</div>
-							<div className=' w-full md:w-1/2 px-0 py-3 md:px-16 h-full '>
-								<div className=' md:border h-full w-full lg:w-11/12  flex flex-col bg-blur text-black rounded-md'>
+							<div className=' w-full md:w-2/3 2xl:w-1/2 px-n2 py-3 2xl:px-16 h-full  '>
+								<div className=' md:border h-full w-full xl:w-11/12  flex flex-col bg-blur text-black rounded-md'>
 									<div className='upperPart h-1/2 flex flex-col justify-between items-center py-5'>
 										<div className='text-red text-lg lg:text-xl'>
 											How much would you like to spend?
@@ -345,9 +345,8 @@ const SpendMoney = () => {
 															className='flex justify-center items-center text-red text-xl -ml-4'>
 															₹
 															<input
-																className={`bg-transparent border-b-2 w-2/3 text-center ml-4 ${
-																	AmoutToSpend > 0 ? 'border-red' : null
-																}`}
+																className={`bg-transparent border-b-2 w-2/3 text-center ml-4 ${AmoutToSpend > 0 ? 'border-red' : null
+																	}`}
 																type='number'
 																value={AmoutToSpend}
 																onChange={(e) =>
@@ -387,7 +386,7 @@ const SpendMoney = () => {
 													variants={container}
 													initial='hidden'
 													animate='visible'
-													className='MoneyOptions grid grid-cols-2 gap-3  sm:flex sm:justify-between sm:items-center sm:w-3/4 h-60 lg:h-1/2 flex-wrap px-0 md:px-8'>
+													className='MoneyOptions grid grid-cols-2 gap-3  sm:flex sm:justify-between sm:items-center sm:w-3/4 h-60 lg:h-1/2 flex-wrap px-0 md:px-8 '>
 													<motion.div
 														variants={item}
 														className='py-1 px-3 cursor-pointer rounded-md my-auto text-center border-2 text-lg border-red  text-primary hover:bg-red hover:text-white transition-all duration-400 ease-in-out'
@@ -458,9 +457,8 @@ const SpendMoney = () => {
 									</div>
 
 									<div
-										className={` lowerPart h-1/2 flex flex-col ${
-											other ? ' justify-end' : 'justify-between'
-										} items-center py-3`}>
+										className={` lowerPart h-1/2 flex flex-col ${other ? ' justify-end' : 'justify-between'
+											} items-center py-3`}>
 										{other ? null : (
 											<>
 												<div className='text-red text-lg lg:text-xl'>

@@ -287,13 +287,13 @@ const AddMoney = () => {
 											</motion.div>
 										</motion.div>
 									</div>
-									<div className='lowerPart  h-1/2   flex flex-col justify-between items-center py-3'>
+									<div className='lowerPart   h-1/2   flex flex-col justify-between items-center py-3'>
 										<div className='text-green text-lg lg:text-xl '>
 											What is the source of income?
 										</div>
 										<motion.div
 											ref={ref}
-											className='px-8 py-6 flex h-full md:h-1/2 w-11/12 md:w-3/4 justify-between items-center '>
+											className='px-8 py-6 overflow-y-hidden flex h-full md:h-1/2 w-11/12 md:w-3/4 justify-between items-center '>
 											<motion.div
 												initial={{ scale: 0, rotate: 180 }}
 												animate={animation}
